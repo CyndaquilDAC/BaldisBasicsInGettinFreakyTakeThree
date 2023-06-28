@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Penny-Pinching", "dad", [146, 113, 253]],
+		["Filler", "dad", [146, 113, 253]],
+		["Say-Hi", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Johnny's Shoppin' Showdown!",
+	"weekBefore": "pomp",
+	"weekName": "Johnny's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

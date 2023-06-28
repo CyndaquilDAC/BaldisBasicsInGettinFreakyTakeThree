@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Lore", "dad", [146, 113, 253]],
+		["Destroy-It", "dad", [146, 113, 253]],
+		["Null", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "NULL",
+	"weekBefore": "the-test",
+	"weekName": "NULL",
+	"startUnlocked": false,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

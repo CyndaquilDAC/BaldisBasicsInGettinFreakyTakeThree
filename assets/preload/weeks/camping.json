@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Bear-Trapped", "dad", [146, 113, 253]],
+		["Stick-Shifting", "dad", [146, 113, 253]],
+		["Cumulonimbus", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Let's go camping!",
+	"weekBefore": "prize",
+	"weekName": "Camping Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

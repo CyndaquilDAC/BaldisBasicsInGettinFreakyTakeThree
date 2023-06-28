@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Shoe-In", "dad", [146, 113, 253]],
+		["Pomp-Stomp", "dad", [146, 113, 253]],
+		["Times-Up", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Mrs. Pomp's Romp",
+	"weekBefore": "beans",
+	"weekName": "Mrs. Pomp's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

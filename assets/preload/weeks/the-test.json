@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Dither", "dad", [146, 113, 253]],
+		["Glare", "dad", [146, 113, 253]],
+		["Blackout", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "The Test Subject",
+	"weekBefore": "farming",
+	"weekName": "The Test's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

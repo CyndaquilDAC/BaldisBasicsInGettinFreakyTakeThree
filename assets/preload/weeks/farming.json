@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Maize", "dad", [146, 113, 253]],
+		["Flagpole", "dad", [146, 113, 253]],
+		["Reaping", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Farming Frenzy!",
+	"weekBefore": "johnny",
+	"weekName": "Farming Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

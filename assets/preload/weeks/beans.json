@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Hippity-Hey", "dad", [146, 113, 253]],
+		["Bubble-Trouble", "dad", [146, 113, 253]],
+		["The-Stuckening", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Beans' Beanin' Scheme!",
+	"weekBefore": "chalkles",
+	"weekName": "Beans' Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

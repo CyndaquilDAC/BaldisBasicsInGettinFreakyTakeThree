@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Basically-Sing", "dad", [146, 113, 253]],
+		["Critical-Thinking", "dad", [146, 113, 253]],
+		["99", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Baldi's Funtastic Learningation Week!",
+	"weekBefore": "baldi",
+	"weekName": "Baldi's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

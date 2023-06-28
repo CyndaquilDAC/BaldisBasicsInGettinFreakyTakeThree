@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Playtime", "dad", [146, 113, 253]],
+		["Ropes", "dad", [146, 113, 253]],
+		["Snip-Snap", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Let's play!",
+	"weekBefore": "principal",
+	"weekName": "Playtime's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

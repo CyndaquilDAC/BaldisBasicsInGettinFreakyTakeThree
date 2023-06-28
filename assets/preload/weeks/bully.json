@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Its-A-Song", "dad", [146, 113, 253]],
+		["Gimme", "dad", [146, 113, 253]],
+		["Boredom", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "No items, no pass!",
+	"weekBefore": "playtime",
+	"weekName": "Bully's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

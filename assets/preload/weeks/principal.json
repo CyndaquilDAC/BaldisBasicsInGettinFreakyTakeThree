@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Whistle", "dad", [146, 113, 253]],
+		["Guilt", "dad", [146, 113, 253]],
+		["Detention", "dad", [146, 113, 253]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "The Week of the Thing",
+	"weekBefore": "baldi",
+	"weekName": "Principal's Week",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}
