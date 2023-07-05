@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Dither", "dad", [146, 113, 253]],
-		["Glare", "dad", [146, 113, 253]],
-		["Blackout", "dad", [146, 113, 253]]
+		["Dither", "test", [146, 113, 253]],
+		["Glare", "test", [146, 113, 253]],
+		["Blackout", "test", [146, 113, 253]]
 	],
 
 	"weekCharacters": [
