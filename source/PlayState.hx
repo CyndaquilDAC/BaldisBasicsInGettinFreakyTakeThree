@@ -99,6 +99,8 @@ class PlayState extends MusicBeatState
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
 
+	private var yctpOverlay:BGSprite;
+
 	#if (haxe >= "4.0.0")
 	public var boyfriendMap:Map<String, Boyfriend> = new Map();
 	public var dadMap:Map<String, Character> = new Map();
@@ -403,6 +405,12 @@ class PlayState extends MusicBeatState
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
 			{
+				case 'basically-sing':
+					curStage = 'starting-area';
+				case 'critical-thinking':
+					curStage = 'yctp';
+				case '99':
+					curStage = 'scrolling-hall-red';
 				default:
 					curStage = 'stage';
 			}
@@ -483,6 +491,106 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 				}
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
+			case 'starting-area':
+				var bg:BGSprite = new BGSprite('startingArea', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'yctp':
+				var bg:BGSprite = new BGSprite('yctp_colorback', 0, 0);
+				bg.scrollFactor.set();
+				bg.antialiasing = false;
+				add(bg);
+
+				yctpOverlay = new BGSprite('yctp', 0, 0);
+				yctpOverlay.scrollFactor.set();
+				yctpOverlay.antialiasing = false;
+			case 'scrolling-hall':
+				var bg:BGSprite = new BGSprite('baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'scrolling-hall-red':
+				var bg:BGSprite = new BGSprite('baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				bg.color = FlxColor.RED;
+				add(bg);
+			case 'office':
+				var bg:BGSprite = new BGSprite('office', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'playtime':
+				var bg:BGSprite = new BGSprite('playtime', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'crafters':
+				var bg:BGSprite = new BGSprite('crafters', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'closet':
+				var bg:BGSprite = new BGSprite('closet', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'bully':
+				var bg:BGSprite = new BGSprite('bully', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'firstPrize1':
+				var bg:BGSprite = new BGSprite('firstPrize1', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
+			case 'firstPrize2':
+				var bg:BGSprite = new BGSprite('firstPrize2', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.antialiasing = false;
+				bg.x += 95;
+				bg.y += 70;
+				add(bg);
 		}
 
 		if(isPixelStage) {
@@ -563,6 +671,13 @@ class PlayState extends MusicBeatState
 		startCharacterPos(boyfriend);
 		boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
+
+		if(yctpOverlay != null)
+		{
+			boyfriendGroup.scrollFactor.set();
+			dadGroup.scrollFactor.set();
+			add(yctpOverlay);
+		}
 
 		var camPos:FlxPoint = new FlxPoint(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
 		if(gf != null)
