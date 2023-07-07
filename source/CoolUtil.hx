@@ -1,8 +1,5 @@
 package;
 
-import openfl.utils.AssetType;
-import flixel.graphics.frames.FlxBitmapFont;
-import flixel.text.FlxBitmapText;
 import flixel.util.FlxSave;
 import flixel.FlxG;
 import openfl.utils.Assets;
@@ -13,6 +10,7 @@ import flixel.system.FlxSound;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
+#else
 import openfl.utils.Assets;
 #end
 
@@ -145,12 +143,10 @@ class CoolUtil
 		so Base Psych saves won't conflict with yours
 		@BeastlyGabi
 	**/
-	public static function getSavePath(folder:String = 'Cynda'):String {
+	public static function getSavePath(folder:String = 'ShadowMario'):String {
 		@:privateAccess
 		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
 			+ '/'
 			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
 	}
-
-	public static var comicSansBmp:FlxBitmapFont = FlxBitmapFont.fromAngelCode(Paths.image("ComicSansPixel_0", "preload"), Paths.xml("ComicSansPixel"));
 }
