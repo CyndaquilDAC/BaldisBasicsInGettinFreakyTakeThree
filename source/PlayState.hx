@@ -1,5 +1,8 @@
 package;
 
+import openfl.utils.AssetType;
+import flixel.graphics.frames.FlxBitmapFont;
+import flixel.text.FlxBitmapText;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -211,6 +214,7 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
+	public var botplayTxtBmp:FlxBitmapText;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -234,7 +238,9 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var scoreTxtBmp:FlxBitmapText;
 	var timeTxt:FlxText;
+	var timeTxtBmp:FlxBitmapText;
 	var scoreTxtTween:FlxTween;
 
 	public static var campaignScore:Int = 0;
@@ -729,9 +735,21 @@ class PlayState extends MusicBeatState
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
-		add(botplayTxt);
+		//add(botplayTxt);
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
+		}
+
+		botplayTxtBmp = new FlxBitmapText(400, timeBarBG.y + 55, "BOTPLAY", CoolUtil.comicSansBmp);
+		botplayTxtBmp.fieldWidth = FlxG.width - 800;
+		botplayTxtBmp.textColor = FlxColor.WHITE;
+		botplayTxtBmp.scrollFactor.set();
+		botplayTxtBmp.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1.25);
+		botplayTxtBmp.alignment = CENTER;
+		botplayTxtBmp.visible = cpuControlled;
+		add(botplayTxtBmp);
+		if(ClientPrefs.downScroll) {
+			botplayTxtBmp.y = timeBarBG.y - 78;
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -743,6 +761,7 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
+		botplayTxtBmp.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
@@ -2017,9 +2036,9 @@ class PlayState extends MusicBeatState
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
 
-		if(botplayTxt.visible) {
+		if(botplayTxtBmp.visible) {
 			botplaySine += 180 * elapsed;
-			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+			botplayTxtBmp.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
 		if (controls.PAUSE && startedCountdown && canPause)
