@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Maize", "dad", [146, 113, 253]],
-		["Flagpole", "dad", [146, 113, 253]],
-		["Reaping", "dad", [146, 113, 253]]
+		["Maize", "baldi", [44, 188, 49]],
+		["Flagpole", "bf", [49, 176, 209]],
+		["Reaping", "reap", [9, 134, 2]]
 	],
 
 	"weekCharacters": [

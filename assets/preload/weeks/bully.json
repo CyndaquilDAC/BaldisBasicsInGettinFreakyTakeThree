@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Its-A-Song", "dad", [146, 113, 253]],
-		["Gimme", "dad", [146, 113, 253]],
-		["Boredom", "dad", [146, 113, 253]]
+		["Its-A-Song", "bully", [203, 96, 0]],
+		["Gimme", "bully", [203, 96, 0]],
+		["Boredom", "bully", [203, 96, 0]]
 	],
 
 	"weekCharacters": [

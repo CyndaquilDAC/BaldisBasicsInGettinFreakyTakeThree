@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Shoe-In", "dad", [146, 113, 253]],
-		["Pomp-Stomp", "dad", [146, 113, 253]],
-		["Times-Up", "dad", [146, 113, 253]]
+		["Shoe-In", "pomp", [187, 2, 2]],
+		["Pomp-Stomp", "pomp", [187, 2, 2]],
+		["Times-Up", "pomp", [187, 2, 2]]
 	],
 
 	"weekCharacters": [

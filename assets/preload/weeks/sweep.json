@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Closet", "dad", [146, 113, 253]],
-		["Draggin", "dad", [146, 113, 253]],
-		["Pristine", "dad", [146, 113, 253]]
+		["Closet", "sweep", [4, 54, 0]],
+		["Draggin", "sweep", [4, 54, 0]],
+		["Pristine", "sweep", [4, 54, 0]]
 	],
 
 	"weekCharacters": [
