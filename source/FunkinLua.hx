@@ -1995,9 +1995,6 @@ class FunkinLua {
 			if(!leftHex.startsWith('0x')) left = Std.parseInt('0xff' + leftHex);
 			var right:FlxColor = Std.parseInt(rightHex);
 			if(!rightHex.startsWith('0x')) right = Std.parseInt('0xff' + rightHex);
-
-			PlayState.instance.timeBar.createFilledBar(right, left);
-			PlayState.instance.timeBar.updateBar();
 		});
 
 		Lua_helper.add_callback(lua, "setObjectCamera", function(obj:String, camera:String = '') {

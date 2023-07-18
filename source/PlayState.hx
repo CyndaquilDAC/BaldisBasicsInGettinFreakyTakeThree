@@ -188,9 +188,6 @@ class PlayState extends MusicBeatState
 	public var healthBar:FlxBar;
 	var songPercent:Float = 0;
 
-	private var timeBarBG:AttachedSprite;
-	public var timeBar:FlxBar;
-
 	public var ratingsData:Array<Rating> = [];
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
@@ -200,7 +197,6 @@ class PlayState extends MusicBeatState
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
 	public var startingSong:Bool = false;
-	private var updateTime:Bool = true;
 	public static var changedDifficulty:Bool = false;
 	public static var chartingMode:Bool = false;
 
@@ -292,6 +288,9 @@ class PlayState extends MusicBeatState
 	public static var lastCombo:FlxSprite;
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
+
+	//intended y is 460
+	public var jackhammerWarning:FlxSprite;
 
 	override public function create()
 	{
@@ -713,52 +712,14 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		timeTxt.scrollFactor.set();
-		timeTxt.alpha = 0;
+		timeTxt = new FlxText(10, 0, FlxG.width - 10, "Get ready!", 48);
+		timeTxt.setFormat("Comic Sans MS Bold", 48, FlxColor.BLACK, LEFT, OUTLINE, FlxColor.WHITE);
 		timeTxt.borderSize = 2;
-		timeTxt.visible = showTime;
-		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
-
-		if(ClientPrefs.timeBarType == 'Song Name')
-		{
-			timeTxt.text = SONG.song;
-		}
-		updateTime = showTime;
-
-		timeBarBG = new AttachedSprite('timeBar');
-		timeBarBG.x = timeTxt.x;
-		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
-		timeBarBG.scrollFactor.set();
-		timeBarBG.alpha = 0;
-		timeBarBG.visible = showTime;
-		timeBarBG.color = FlxColor.BLACK;
-		timeBarBG.xAdd = -4;
-		timeBarBG.yAdd = -4;
-		add(timeBarBG);
-
-		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
-			'songPercent', 0, 1);
-		timeBar.scrollFactor.set();
-		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
-		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
-		timeBar.alpha = 0;
-		timeBar.visible = showTime;
-		add(timeBar);
-		add(timeTxt);
-		timeBarBG.sprTracker = timeBar;
+		timeTxt.scrollFactor.set();
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
 		add(grpNoteSplashes);
-
-		if(ClientPrefs.timeBarType == 'Song Name')
-		{
-			timeTxt.size = 24;
-			timeTxt.y += 3;
-		}
 
 		var splash:NoteSplash = new NoteSplash(100, 100, 0);
 		grpNoteSplashes.add(splash);
@@ -833,21 +794,27 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat("Comic Sans MS Bold", 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat("Comic Sans MS Bold", 20, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
-		botplayTxt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt = new FlxText(400, 27 + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt.setFormat("Comic Sans MS Bold", 32, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
 		if(ClientPrefs.downScroll) {
-			botplayTxt.y = timeBarBG.y - 78;
+			botplayTxt.y = 27 - 78;
 		}
+
+		add(timeTxt);
+
+		jackhammerWarning = new FlxSprite(5, 750).loadGraphic(Paths.image("jackhammer"));
+		jackhammerWarning.antialiasing = false;
+		add(jackhammerWarning);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -858,9 +825,8 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
-		timeBar.cameras = [camHUD];
-		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		jackhammerWarning.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		startingSong = true;
@@ -1670,8 +1636,6 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
@@ -2214,20 +2178,20 @@ class PlayState extends MusicBeatState
 					// trace('MISSED FRAME');
 				}
 
-				if(updateTime) {
-					var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
-					if(curTime < 0) curTime = 0;
-					songPercent = (curTime / songLength);
+				var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
+				if(curTime < 0) curTime = 0;
+				songPercent = (curTime / songLength);
 
-					var songCalc:Float = (songLength - curTime);
-					if(ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime;
+				var songCalc:Float = (curTime);
+				var songCalcTwo:Float = (songLength);
 
-					var secondsTotal:Int = Math.floor(songCalc / 1000);
-					if(secondsTotal < 0) secondsTotal = 0;
+				var secondsTotal:Int = Math.floor(songCalc / 1000);
+				if(secondsTotal < 0) secondsTotal = 0;
 
-					if(ClientPrefs.timeBarType != 'Song Name')
-						timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
-				}
+				var secondsTotalTwo:Int = Math.floor(songCalcTwo / 1000);
+				if(secondsTotalTwo < 0) secondsTotalTwo = 0;
+
+				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false) + "/" + FlxStringUtil.formatTime(secondsTotalTwo, false) + " " + curSong.replace("-", " ");
 			}
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
@@ -2872,7 +2836,6 @@ class PlayState extends MusicBeatState
 	{
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
 
-		updateTime = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
 		vocals.pause();
@@ -2907,14 +2870,10 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		timeBarBG.visible = false;
-		timeBar.visible = false;
-		timeTxt.visible = false;
 		canPause = false;
 		endingSong = true;
 		camZooming = false;
 		inCutscene = false;
-		updateTime = false;
 
 		deathCounter = 0;
 		seenCutscene = false;
@@ -3863,6 +3822,18 @@ class PlayState extends MusicBeatState
 		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
 		{
 			dad.dance();
+		}
+
+		switch(curSong.toLowerCase())
+		{
+			case 'dsci':
+				switch(curBeat)
+				{
+					case 192:
+						FlxTween.tween(jackhammerWarning, {y: 460}, (Conductor.crochet / 1000), {ease: FlxEase.circIn});
+					case 255:
+						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000), {ease: FlxEase.circOut});
+				}
 		}
 
 		lastBeatHit = curBeat;
