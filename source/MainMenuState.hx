@@ -71,7 +71,7 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = false;
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -85,7 +85,7 @@ class MainMenuState extends MusicBeatState
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
-		magenta.antialiasing = ClientPrefs.globalAntialiasing;
+		magenta.antialiasing = false;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 
@@ -110,7 +110,7 @@ class MainMenuState extends MusicBeatState
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.antialiasing = false;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 		}
@@ -119,11 +119,13 @@ class MainMenuState extends MusicBeatState
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Baldi's Basics in Gettin' Freaky v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.antialiasing = false;
 		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.antialiasing = false;
 		add(versionShit);
 
 		changeItem();

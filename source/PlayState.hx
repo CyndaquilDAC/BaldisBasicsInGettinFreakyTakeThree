@@ -302,7 +302,6 @@ class PlayState extends MusicBeatState
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
-		PauseSubState.songName = null; //Reset to default
 		playbackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
 
 		keysArray = [
@@ -468,27 +467,23 @@ class PlayState extends MusicBeatState
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
-
 				var stageFront:BGSprite = new BGSprite('stagefront', -650, 600, 0.9, 0.9);
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 				stageFront.updateHitbox();
 				add(stageFront);
-				if(!ClientPrefs.lowQuality) {
-					var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
-					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-					stageLight.updateHitbox();
-					add(stageLight);
-					var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
-					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-					stageLight.updateHitbox();
-					stageLight.flipX = true;
-					add(stageLight);
-
-					var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
-					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-					stageCurtains.updateHitbox();
-					add(stageCurtains);
-				}
+				var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
+				stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+				stageLight.updateHitbox();
+				add(stageLight);
+				var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
+				stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+				stageLight.updateHitbox();
+				stageLight.flipX = true;
+				add(stageLight);
+				var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
+				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+				stageCurtains.updateHitbox();
+				add(stageCurtains);
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 			case 'starting-area':
 				var bg:BGSprite = new BGSprite('startingArea', -600, -200);
@@ -713,9 +708,10 @@ class PlayState extends MusicBeatState
 		strumLine.scrollFactor.set();
 
 		timeTxt = new FlxText(10, 0, FlxG.width - 10, "Get ready!", 48);
-		timeTxt.setFormat("Comic Sans MS Bold", 48, FlxColor.BLACK, LEFT, OUTLINE, FlxColor.WHITE);
-		timeTxt.borderSize = 2;
+		timeTxt.setFormat(Paths.font("comic-bald.ttf"), 48, FlxColor.BLACK, LEFT, OUTLINE, FlxColor.WHITE);
+		timeTxt.borderSize = 1;
 		timeTxt.scrollFactor.set();
+		timeTxt.antialiasing = false;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -765,13 +761,13 @@ class PlayState extends MusicBeatState
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = !ClientPrefs.hideHud;
+		healthBarBG.visible = false;
 		healthBarBG.xAdd = -4;
 		healthBarBG.yAdd = -4;
 		add(healthBarBG);
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width), Std.int(healthBarBG.height), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
@@ -794,16 +790,18 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat("Comic Sans MS Bold", 20, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
+		scoreTxt.setFormat(Paths.font("comic-bald.ttf"), 28, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
+		scoreTxt.borderSize = 1;
+		scoreTxt.antialiasing = false;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
 		botplayTxt = new FlxText(400, 27 + 55, FlxG.width - 800, "BOTPLAY", 32);
-		botplayTxt.setFormat("Comic Sans MS Bold", 32, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
+		botplayTxt.setFormat(Paths.font("comic-bald.ttf"), 42, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		botplayTxt.scrollFactor.set();
-		botplayTxt.borderSize = 1.25;
+		botplayTxt.borderSize = 1;
+		botplayTxt.antialiasing = false;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
 		if(ClientPrefs.downScroll) {
@@ -903,12 +901,6 @@ class PlayState extends MusicBeatState
 		precacheList.set('missnote1', 'sound');
 		precacheList.set('missnote2', 'sound');
 		precacheList.set('missnote3', 'sound');
-
-		if (PauseSubState.songName != null) {
-			precacheList.set(PauseSubState.songName, 'music');
-		} else if(ClientPrefs.pauseMusic != 'None') {
-			precacheList.set(Paths.formatToSongPath(ClientPrefs.pauseMusic), 'music');
-		}
 
 		precacheList.set('alphabet', 'image');
 	
@@ -1411,7 +1403,7 @@ class PlayState extends MusicBeatState
 				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
 
 				var introAlts:Array<String> = introAssets.get('default');
-				var antialias:Bool = ClientPrefs.globalAntialiasing;
+				var antialias:Bool = false;
 				if(isPixelStage) {
 					introAlts = introAssets.get('pixel');
 					antialias = false;
@@ -3143,9 +3135,9 @@ class PlayState extends MusicBeatState
 		if (!PlayState.isPixelStage)
 		{
 			rating.setGraphicSize(Std.int(rating.width * 0.7));
-			rating.antialiasing = ClientPrefs.globalAntialiasing;
+			rating.antialiasing = false;
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
-			comboSpr.antialiasing = ClientPrefs.globalAntialiasing;
+			comboSpr.antialiasing = false;
 		}
 		else
 		{
@@ -3200,7 +3192,7 @@ class PlayState extends MusicBeatState
 
 			if (!PlayState.isPixelStage)
 			{
-				numScore.antialiasing = ClientPrefs.globalAntialiasing;
+				numScore.antialiasing = false;
 				numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			}
 			else
@@ -3829,10 +3821,10 @@ class PlayState extends MusicBeatState
 			case 'dsci':
 				switch(curBeat)
 				{
-					case 192:
-						FlxTween.tween(jackhammerWarning, {y: 460}, (Conductor.crochet / 1000), {ease: FlxEase.circIn});
-					case 255:
-						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000), {ease: FlxEase.circOut});
+					case 191:
+						FlxTween.tween(jackhammerWarning, {y: 460}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backOut});
+					case 254:
+						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backIn});
 				}
 		}
 

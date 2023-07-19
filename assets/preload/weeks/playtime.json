@@ -15,6 +15,7 @@
 	"storyName": "Let's play!",
 	"weekBefore": "principal",
 	"weekName": "Playtime's Week",
+	"weekNameCode": "playtime",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

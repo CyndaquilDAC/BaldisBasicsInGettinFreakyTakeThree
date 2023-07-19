@@ -15,6 +15,7 @@
 	"storyName": "Mrs. Pomp's Romp",
 	"weekBefore": "beans",
 	"weekName": "Mrs. Pomp's Week",
+	"weekNameCode": "pomp",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

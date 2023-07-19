@@ -87,8 +87,8 @@ class StrumNote extends FlxSprite
 			animation.addByPrefix('purple', 'arrowLEFT');
 			animation.addByPrefix('red', 'arrowRIGHT');
 
-			antialiasing = ClientPrefs.globalAntialiasing;
-			setGraphicSize(Std.int(width * 0.7));
+			antialiasing = false;
+			setGraphicSize(Std.int(width * 0.8));
 
 			switch (Math.abs(noteData) % 4)
 			{

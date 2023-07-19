@@ -72,7 +72,7 @@ class DialogueEditorState extends MusicBeatState
 		box = new FlxSprite(70, 370);
 		box.frames = Paths.getSparrowAtlas('speech_bubble');
 		box.scrollFactor.set();
-		box.antialiasing = ClientPrefs.globalAntialiasing;
+		box.antialiasing = false;
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24);
 		box.animation.addByPrefix('angry', 'AHH speech bubble', 24);
 		box.animation.addByPrefix('center', 'speech bubble middle', 24);
@@ -86,17 +86,20 @@ class DialogueEditorState extends MusicBeatState
 		FlxG.mouse.visible = true;
 
 		var addLineText:FlxText = new FlxText(10, 10, FlxG.width - 20, 'Press O to remove the current dialogue line, Press P to add another line after the current one.', 8);
-		addLineText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		addLineText.setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		addLineText.antialiasing = false;
 		addLineText.scrollFactor.set();
 		add(addLineText);
 
 		selectedText = new FlxText(10, 32, FlxG.width - 20, '', 8);
-		selectedText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		selectedText.setFormat(Paths.font("comic-bald.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		selectedText.antialiasing = false;
 		selectedText.scrollFactor.set();
 		add(selectedText);
 
 		animText = new FlxText(10, 62, FlxG.width - 20, '', 8);
-		animText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		animText.setFormat(Paths.font("comic-bald.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		animText.antialiasing = false;
 		animText.scrollFactor.set();
 		add(animText);
 		

@@ -69,22 +69,20 @@ class NoteOffsetState extends MusicBeatState
 		stageFront.updateHitbox();
 		add(stageFront);
 
-		if(!ClientPrefs.lowQuality) {
-			var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
-			stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-			stageLight.updateHitbox();
-			add(stageLight);
-			var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
-			stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-			stageLight.updateHitbox();
-			stageLight.flipX = true;
-			add(stageLight);
+		var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
+		stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+		stageLight.updateHitbox();
+		add(stageLight);
+		var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
+		stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+		stageLight.updateHitbox();
+		stageLight.flipX = true;
+		add(stageLight);
 
-			var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
-			stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-			stageCurtains.updateHitbox();
-			add(stageCurtains);
-		}
+		var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
+		stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+		stageCurtains.updateHitbox();
+		add(stageCurtains);
 
 		// Characters
 		gf = new Character(400, 130, 'gf');
@@ -107,7 +105,7 @@ class NoteOffsetState extends MusicBeatState
 		rating.cameras = [camHUD];
 		rating.setGraphicSize(Std.int(rating.width * 0.7));
 		rating.updateHitbox();
-		rating.antialiasing = ClientPrefs.globalAntialiasing;
+		rating.antialiasing = false;
 		
 		add(rating);
 
@@ -128,7 +126,7 @@ class NoteOffsetState extends MusicBeatState
 			numScore.cameras = [camHUD];
 			numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			numScore.updateHitbox();
-			numScore.antialiasing = ClientPrefs.globalAntialiasing;
+			numScore.antialiasing = false;
 			comboNums.add(numScore);
 			daLoop++;
 		}
@@ -152,9 +150,10 @@ class NoteOffsetState extends MusicBeatState
 		add(beatText);
 		
 		timeTxt = new FlxText(0, 600, FlxG.width, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font("comic-bald.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.antialiasing = false;
 		timeTxt.scrollFactor.set();
-		timeTxt.borderSize = 2;
+		timeTxt.borderSize = 1;
 		timeTxt.visible = false;
 		timeTxt.cameras = [camHUD];
 
@@ -189,7 +188,8 @@ class NoteOffsetState extends MusicBeatState
 		add(blackBox);
 
 		changeModeText = new FlxText(0, 4, FlxG.width, "", 32);
-		changeModeText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
+		changeModeText.setFormat(Paths.font("comic-bald.ttf"), 32, FlxColor.WHITE, CENTER);
+		changeModeText.antialiasing = false;
 		changeModeText.scrollFactor.set();
 		changeModeText.cameras = [camHUD];
 		add(changeModeText);
@@ -423,9 +423,10 @@ class NoteOffsetState extends MusicBeatState
 		for (i in 0...4)
 		{
 			var text:FlxText = new FlxText(10, 48 + (i * 30), 0, '', 24);
-			text.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.setFormat(Paths.font("comic-bald.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.antialiasing = false;
 			text.scrollFactor.set();
-			text.borderSize = 2;
+			text.borderSize = 1;
 			dumbTexts.add(text);
 			text.cameras = [camHUD];
 

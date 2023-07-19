@@ -200,14 +200,12 @@ class FunkinLua {
 		set('framerate', ClientPrefs.framerate);
 		set('ghostTapping', ClientPrefs.ghostTapping);
 		set('hideHud', ClientPrefs.hideHud);
-		set('timeBarType', ClientPrefs.timeBarType);
 		set('scoreZoom', ClientPrefs.scoreZoom);
 		set('cameraZoomOnBeat', ClientPrefs.camZooms);
 		set('flashingLights', ClientPrefs.flashing);
 		set('noteOffset', ClientPrefs.noteOffset);
 		set('healthBarAlpha', ClientPrefs.healthBarAlpha);
 		set('noResetButton', ClientPrefs.noReset);
-		set('lowQuality', ClientPrefs.lowQuality);
 		set('shadersEnabled', ClientPrefs.shaders);
 		set('scriptName', scriptName);
 		set('currentModDirectory', Paths.currentModDirectory);
@@ -1715,7 +1713,7 @@ class FunkinLua {
 			{
 				leSprite.loadGraphic(Paths.image(image));
 			}
-			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			leSprite.antialiasing = false;
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 			leSprite.active = true;
 		});
@@ -1725,7 +1723,7 @@ class FunkinLua {
 			var leSprite:ModchartSprite = new ModchartSprite(x, y);
 
 			loadFrames(leSprite, image, spriteType);
-			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			leSprite.antialiasing = false;
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 		});
 
@@ -3273,7 +3271,7 @@ class ModchartSprite extends FlxSprite
 	public function new(?x:Float = 0, ?y:Float = 0)
 	{
 		super(x, y);
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = false;
 	}
 }
 
@@ -3283,7 +3281,8 @@ class ModchartText extends FlxText
 	public function new(x:Float, y:Float, text:String, width:Float)
 	{
 		super(x, y, width, text, 16);
-		setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		antialiasing = false;
 		cameras = [PlayState.instance.camHUD];
 		scrollFactor.set();
 		borderSize = 2;
@@ -3297,7 +3296,8 @@ class DebugLuaText extends FlxText
 	public function new(text:String, parentGroup:FlxTypedGroup<DebugLuaText>, color:FlxColor) {
 		this.parentGroup = parentGroup;
 		super(10, 10, 0, text, 16);
-		setFormat(Paths.font("vcr.ttf"), 16, color, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		setFormat(Paths.font("comic-bald.ttf"), 16, color, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		antialiasing = false;
 		scrollFactor.set();
 		borderSize = 1;
 	}

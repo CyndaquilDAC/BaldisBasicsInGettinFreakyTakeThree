@@ -15,6 +15,7 @@
 	"storyName": "Screeching Noise",
 	"weekBefore": "sweep",
 	"weekName": "Arts and Crafters' Week",
+	"weekNameCode": "crafters",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

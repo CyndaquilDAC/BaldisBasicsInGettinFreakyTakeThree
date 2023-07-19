@@ -16,6 +16,7 @@
 	"storyName": "Extras",
 	"weekBefore": "null",
 	"weekName": "Extras",
+	"weekNameCode": "extras",
 	"startUnlocked": true,
 
 	"hideStoryMode": true,

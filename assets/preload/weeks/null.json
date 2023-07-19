@@ -15,6 +15,7 @@
 	"storyName": "NULL",
 	"weekBefore": "the-test",
 	"weekName": "NULL",
+	"weekNameCode": "null",
 	"startUnlocked": false,
 
 	"hideStoryMode": false,

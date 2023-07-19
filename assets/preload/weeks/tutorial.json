@@ -13,6 +13,7 @@
 	"storyName": "How to play the game!",
 	"weekBefore": "tutorial",
 	"weekName": "Tutorial Week",
+	"weekNameCode": "tutorial",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

@@ -15,6 +15,7 @@
 	"storyName": "Chalkin' Chalkles Chazam!",
 	"weekBefore": "camping",
 	"weekName": "Chalkles' Week",
+	"weekNameCode": "chalkles",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

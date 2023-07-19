@@ -15,6 +15,7 @@
 	"storyName": "Beans' Beanin' Scheme!",
 	"weekBefore": "chalkles",
 	"weekName": "Beans' Week",
+	"weekNameCode": "beans",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

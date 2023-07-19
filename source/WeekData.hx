@@ -15,6 +15,7 @@ typedef WeekFile =
 	var weekBefore:String;
 	var storyName:String;
 	var weekName:String;
+	var weekNameCode:String;
 	var freeplayColor:Array<Int>;
 	var startUnlocked:Bool;
 	var hiddenUntilUnlocked:Bool;
@@ -26,6 +27,7 @@ typedef WeekFile =
 class WeekData {
 	public static var weeksLoaded:Map<String, WeekData> = new Map<String, WeekData>();
 	public static var weeksList:Array<String> = [];
+	public static var weeksListCode:Array<String> = [];
 	public var folder:String = '';
 	
 	// JSON variables
@@ -35,6 +37,7 @@ class WeekData {
 	public var weekBefore:String;
 	public var storyName:String;
 	public var weekName:String;
+	public var weekNameCode:String;
 	public var freeplayColor:Array<Int>;
 	public var startUnlocked:Bool;
 	public var hiddenUntilUnlocked:Bool;
@@ -52,6 +55,7 @@ class WeekData {
 			weekBefore: 'tutorial',
 			storyName: 'Your New Week',
 			weekName: 'Custom Week',
+			weekNameCode: "custom",
 			freeplayColor: [146, 113, 253],
 			startUnlocked: true,
 			hiddenUntilUnlocked: false,
@@ -70,6 +74,7 @@ class WeekData {
 		weekBefore = weekFile.weekBefore;
 		storyName = weekFile.storyName;
 		weekName = weekFile.weekName;
+		weekNameCode = weekFile.weekNameCode;
 		freeplayColor = weekFile.freeplayColor;
 		startUnlocked = weekFile.startUnlocked;
 		hiddenUntilUnlocked = weekFile.hiddenUntilUnlocked;
@@ -99,6 +104,7 @@ class WeekData {
 						if(weekFile != null && (isStoryMode == null || (isStoryMode && !weekFile.hideStoryMode) || (!isStoryMode && !weekFile.hideFreeplay))) {
 							weeksLoaded.set(sexList[i], weekFile);
 							weeksList.push(sexList[i]);
+							weeksListCode.push(weekFile.weekNameCode);
 						}
 					}
 				}

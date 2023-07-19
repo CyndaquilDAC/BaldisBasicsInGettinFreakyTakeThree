@@ -195,8 +195,10 @@ class Note extends FlxSprite
 
 		if (isSustainNote && prevNote != null)
 		{
-			alpha = 0.6;
-			multAlpha = 0.6;
+			setGraphicSize(Std.int(width * 0.7));
+
+			alpha = 0.45;
+			multAlpha = 0.45;
 			hitsoundDisabled = true;
 			if(ClientPrefs.downScroll) flipY = true;
 
@@ -298,7 +300,7 @@ class Note extends FlxSprite
 		} else {
 			frames = Paths.getSparrowAtlas(blahblah);
 			loadNoteAnims();
-			antialiasing = ClientPrefs.globalAntialiasing;
+			antialiasing = false;
 		}
 		if(isSustainNote) {
 			scale.y = lastScaleY;
@@ -324,7 +326,7 @@ class Note extends FlxSprite
 			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
 		}
 
-		setGraphicSize(Std.int(width * 0.7));
+		setGraphicSize(Std.int(width * 0.8));
 		updateHitbox();
 	}
 

@@ -15,6 +15,7 @@
 	"storyName": "Will you marry me?",
 	"weekBefore": "crafters",
 	"weekName": "First Prize's Week",
+	"weekNameCode": "prize",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

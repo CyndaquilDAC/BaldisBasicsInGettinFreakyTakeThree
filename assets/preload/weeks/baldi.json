@@ -15,6 +15,7 @@
 	"storyName": "Baldi's Funtastic Learningation Week!",
 	"weekBefore": "tutorial",
 	"weekName": "Baldi's Week",
+	"weekNameCode": "baldi",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

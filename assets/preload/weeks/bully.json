@@ -15,6 +15,7 @@
 	"storyName": "No items, no pass!",
 	"weekBefore": "playtime",
 	"weekName": "Bully's Week",
+	"weekNameCode": "bully",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

@@ -74,7 +74,7 @@ class ControlsSubState extends MusicBeatSubstate {
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = false;
 		add(bg);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();

@@ -26,7 +26,8 @@ class OutdatedState extends MusicBeatState
 			\n
 			Thank you for using the Engine!",
 			32);
-		warnText.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+		warnText.setFormat(Paths.font("comic-bald.ttf"), 32, FlxColor.WHITE, CENTER);
+		warnText.antialiasing = false;
 		warnText.screenCenter(Y);
 		add(warnText);
 	}

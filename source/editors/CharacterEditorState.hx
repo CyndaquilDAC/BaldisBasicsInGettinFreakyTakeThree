@@ -127,7 +127,8 @@ class CharacterEditorState extends MusicBeatState
 		dumbTexts.cameras = [camHUD];
 
 		textAnim = new FlxText(300, 16);
-		textAnim.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		textAnim.setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		textAnim.antialiasing = false;
 		textAnim.borderSize = 1;
 		textAnim.size = 32;
 		textAnim.scrollFactor.set();
@@ -153,7 +154,8 @@ class CharacterEditorState extends MusicBeatState
 		{
 			var tipText:FlxText = new FlxText(FlxG.width - 320, FlxG.height - 15 - 16 * (tipTextArray.length - i), 300, tipTextArray[i], 12);
 			tipText.cameras = [camHUD];
-			tipText.setFormat(null, 12, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE_FAST, FlxColor.BLACK);
+			tipText.setFormat(Paths.font("comic-bald.ttf"), 12, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE_FAST, FlxColor.BLACK);
+			tipText.antialiasing = false;
 			tipText.scrollFactor.set();
 			tipText.borderSize = 1;
 			add(tipText);
@@ -553,7 +555,7 @@ class CharacterEditorState extends MusicBeatState
 		noAntialiasingCheckBox.checked = char.noAntialiasing;
 		noAntialiasingCheckBox.callback = function() {
 			char.antialiasing = false;
-			if(!noAntialiasingCheckBox.checked && ClientPrefs.globalAntialiasing) {
+			if(!noAntialiasingCheckBox.checked) {
 				char.antialiasing = true;
 			}
 			char.noAntialiasing = noAntialiasingCheckBox.checked;
@@ -889,7 +891,8 @@ class CharacterEditorState extends MusicBeatState
 		for (anim => offsets in char.animOffsets)
 		{
 			var text:FlxText = new FlxText(10, 20 + (18 * daLoop), 0, anim + ": " + offsets, 15);
-			text.setFormat(null, 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.antialiasing = false;
 			text.scrollFactor.set();
 			text.borderSize = 1;
 			dumbTexts.add(text);

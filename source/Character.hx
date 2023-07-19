@@ -90,7 +90,7 @@ class Character extends FlxSprite
 		#end
 		curCharacter = character;
 		this.isPlayer = isPlayer;
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = true;
 		var library:String = null;
 		switch (curCharacter)
 		{
@@ -189,7 +189,6 @@ class Character extends FlxSprite
 					healthColorArray = json.healthbar_colors;
 
 				antialiasing = !noAntialiasing;
-				if(!ClientPrefs.globalAntialiasing) antialiasing = false;
 
 				animationsArray = json.animations;
 				if(animationsArray != null && animationsArray.length > 0) {
@@ -327,12 +326,12 @@ class Character extends FlxSprite
 				danced = !danced;
 
 				if (danced)
-					playAnim('danceRight' + idleSuffix);
+					playAnim('danceRight' + idleSuffix, true);
 				else
-					playAnim('danceLeft' + idleSuffix);
+					playAnim('danceLeft' + idleSuffix, true);
 			}
 			else if(animation.getByName('idle' + idleSuffix) != null) {
-					playAnim('idle' + idleSuffix);
+					playAnim('idle' + idleSuffix, true);
 			}
 		}
 	}

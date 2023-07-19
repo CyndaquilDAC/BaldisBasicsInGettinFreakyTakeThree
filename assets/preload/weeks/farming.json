@@ -15,6 +15,7 @@
 	"storyName": "Farming Frenzy!",
 	"weekBefore": "johnny",
 	"weekName": "Farming Week",
+	"weekNameCode": "farming",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

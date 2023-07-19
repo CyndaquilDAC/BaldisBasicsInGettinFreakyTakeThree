@@ -15,6 +15,7 @@
 	"storyName": "Let's go camping!",
 	"weekBefore": "prize",
 	"weekName": "Camping Week",
+	"weekNameCode": "camping",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

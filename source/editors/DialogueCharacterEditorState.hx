@@ -115,7 +115,7 @@ class DialogueCharacterEditorState extends MusicBeatState
 		box = new FlxSprite(70, 370);
 		box.frames = Paths.getSparrowAtlas('speech_bubble');
 		box.scrollFactor.set();
-		box.antialiasing = ClientPrefs.globalAntialiasing;
+		box.antialiasing = false;
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24);
 		box.animation.addByPrefix('center', 'speech bubble middle', 24);
 		box.animation.play('normal', true);
@@ -124,27 +124,31 @@ class DialogueCharacterEditorState extends MusicBeatState
 		hudGroup.add(box);
 
 		tipText = new FlxText(10, 10, FlxG.width - 20, TIP_TEXT_MAIN, 8);
-		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tipText.setFormat(Paths.font("comic-bald.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tipText.antialiasing = false;
 		tipText.cameras = [camHUD];
 		tipText.scrollFactor.set();
 		add(tipText);
 
 		offsetLoopText = new FlxText(10, 10, 0, '', 32);
-		offsetLoopText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		offsetLoopText.setFormat(Paths.font("comic-bald.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		offsetLoopText.antialiasing = false;
 		offsetLoopText.cameras = [camHUD];
 		offsetLoopText.scrollFactor.set();
 		add(offsetLoopText);
 		offsetLoopText.visible = false;
 
 		offsetIdleText = new FlxText(10, 46, 0, '', 32);
-		offsetIdleText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		offsetIdleText.setFormat(Paths.font("comic-bald.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		offsetIdleText.antialiasing = false;
 		offsetIdleText.cameras = [camHUD];
 		offsetIdleText.scrollFactor.set();
 		add(offsetIdleText);
 		offsetIdleText.visible = false;
 
 		animText = new FlxText(10, 22, FlxG.width - 20, '', 8);
-		animText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		animText.setFormat(Paths.font("comic-bald.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		animText.antialiasing = false;
 		animText.scrollFactor.set();
 		animText.cameras = [camHUD];
 		add(animText);

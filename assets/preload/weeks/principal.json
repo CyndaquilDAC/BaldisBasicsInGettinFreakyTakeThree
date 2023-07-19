@@ -15,6 +15,7 @@
 	"storyName": "The Week of the Thing",
 	"weekBefore": "baldi",
 	"weekName": "Principal's Week",
+	"weekNameCode": "principal",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

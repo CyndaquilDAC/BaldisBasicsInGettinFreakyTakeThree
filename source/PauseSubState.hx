@@ -31,8 +31,6 @@ class PauseSubState extends MusicBeatSubstate
 	var curTime:Float = Math.max(0, Conductor.songPosition);
 	//var botplayText:FlxText;
 
-	public static var songName:String = '';
-
 	public function new(x:Float, y:Float)
 	{
 		super();
@@ -62,11 +60,7 @@ class PauseSubState extends MusicBeatSubstate
 
 
 		pauseMusic = new flixel.sound.FlxSound();
-		if(songName != null) {
-			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
-		} else if (songName != 'None') {
-			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)), true, true);
-		}
+		pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath("pause")), true, true);
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
@@ -80,27 +74,31 @@ class PauseSubState extends MusicBeatSubstate
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
-		levelInfo.setFormat("Comic Sans MS Bold", 32);
+		levelInfo.setFormat(Paths.font("comic-bald.ttf"), 32);
+		levelInfo.antialiasing = false;
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
 		levelDifficulty.text += CoolUtil.difficultyString();
 		levelDifficulty.scrollFactor.set();
-		levelDifficulty.setFormat("Comic Sans MS Bold", 32);
+		levelDifficulty.setFormat(Paths.font("comic-bald.ttf"), 32);
+		levelDifficulty.antialiasing = false;
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
 		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
 		blueballedTxt.text = "Caught: " + PlayState.deathCounter;
 		blueballedTxt.scrollFactor.set();
-		blueballedTxt.setFormat("Comic Sans MS Bold", 32);
+		blueballedTxt.setFormat(Paths.font("comic-bald.ttf"), 32);
+		blueballedTxt.antialiasing = false;
 		blueballedTxt.updateHitbox();
 		add(blueballedTxt);
 
 		practiceText = new FlxText(20, 15 + 101, 0, "PRACTICE MODE", 32);
 		practiceText.scrollFactor.set();
-		practiceText.setFormat("Comic Sans MS Bold", 32);
+		practiceText.setFormat(Paths.font("comic-bald.ttf"), 32);
+		practiceText.antialiasing = false;
 		practiceText.x = FlxG.width - (practiceText.width + 20);
 		practiceText.updateHitbox();
 		practiceText.visible = PlayState.instance.practiceMode;
@@ -108,7 +106,8 @@ class PauseSubState extends MusicBeatSubstate
 
 		var chartingText:FlxText = new FlxText(20, 15 + 101, 0, "CHARTING MODE", 32);
 		chartingText.scrollFactor.set();
-		chartingText.setFormat("Comic Sans MS Bold", 32);
+		chartingText.setFormat(Paths.font("comic-bald.ttf"), 32);
+		chartingText.antialiasing = false;
 		chartingText.x = FlxG.width - (chartingText.width + 20);
 		chartingText.y = FlxG.height - (chartingText.height + 20);
 		chartingText.updateHitbox();
@@ -357,9 +356,10 @@ class PauseSubState extends MusicBeatSubstate
 			if(menuItems[i] == 'Skip Time')
 			{
 				skipTimeText = new FlxText(0, 0, 0, '', 64);
-				skipTimeText.setFormat("Comic Sans MS Bold", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				skipTimeText.setFormat(Paths.font("comic-bald.ttf"), 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				skipTimeText.scrollFactor.set();
-				skipTimeText.borderSize = 2;
+				skipTimeText.borderSize = 1;
+				skipTimeText.antialiasing = false;
 				skipTimeTracker = item;
 				add(skipTimeText);
 

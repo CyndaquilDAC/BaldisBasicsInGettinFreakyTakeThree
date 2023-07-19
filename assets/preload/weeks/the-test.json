@@ -15,6 +15,7 @@
 	"storyName": "The Test Subject",
 	"weekBefore": "farming",
 	"weekName": "The Test's Week",
+	"weekNameCode": "the-test",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,
