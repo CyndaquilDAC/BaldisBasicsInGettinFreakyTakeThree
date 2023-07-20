@@ -52,9 +52,14 @@ class StoryMenuState extends MusicBeatState
 			{
 				loadedWeeks.push(weekFile);
 				WeekData.setDirectoryFromWeek(weekFile);
-				trace("WEEK FILE NAME IS " + weekFile.fileName + ", WEEK NAME IS " + weekFile.weekName + ", WEEK NAME CODE IS " + weekFile.weekNameCode);
-				var weekThing:MenuItem = new MenuItem(10, 10, weekFile.fileName);
+				var GAHHHHH:String = weekFile.weekNameCode;
+				var stringThing:Array<String> = [];
+				for (i in 0...weekFile.songs.length) {
+					stringThing.push(weekFile.songs[i][0]);
+				}
+				var weekThing:MenuItem = new MenuItem(10, 10, GAHHHHH, stringThing, weekFile.storyName);
 				weekThing.y += ((weekThing.height + 20) * num);
+				weekThing.screenCenter(X);
 				weekThing.targetY = num;
 				weekThing.ID = num;
 				grpWeekText.add(weekThing);
