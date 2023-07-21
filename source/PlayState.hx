@@ -409,6 +409,8 @@ class PlayState extends MusicBeatState
 					curStage = 'yctp';
 				case '99':
 					curStage = 'scrolling-hall-red';
+				case 'its-a-song' | 'gimme' | 'boredom':
+					curStage = 'bully';
 				default:
 					curStage = 'stage';
 			}
@@ -560,7 +562,7 @@ class PlayState extends MusicBeatState
 				add(bg);
 			case 'bully':
 				var bg:BGSprite = new BGSprite('bully', -600, -200);
-				bg.scale.set(0.95, 0.95);
+				bg.scale.set(0.775, 0.775);
 				bg.updateHitbox();
 				bg.screenCenter();
 				bg.antialiasing = false;

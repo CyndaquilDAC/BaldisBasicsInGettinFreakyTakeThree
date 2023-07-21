@@ -57,7 +57,7 @@ class StoryMenuState extends MusicBeatState
 				for (i in 0...weekFile.songs.length) {
 					stringThing.push(weekFile.songs[i][0]);
 				}
-				var weekThing:MenuItem = new MenuItem(10, 10, GAHHHHH, stringThing, weekFile.storyName);
+				var weekThing:MenuItem = new MenuItem(10, 10, GAHHHHH, stringThing, weekFile.storyName, isLocked);
 				weekThing.y += ((weekThing.height + 20) * num);
 				weekThing.screenCenter(X);
 				weekThing.targetY = num;
