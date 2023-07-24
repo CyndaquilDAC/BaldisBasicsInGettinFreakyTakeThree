@@ -292,6 +292,11 @@ class PlayState extends MusicBeatState
 	//intended y is 460
 	public var jackhammerWarning:FlxSprite;
 
+	var dsciLeft:BGSprite;
+	var dsciDown:BGSprite;
+	var dsciUp:BGSprite;
+	var dsciRight:BGSprite;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -411,6 +416,8 @@ class PlayState extends MusicBeatState
 					curStage = 'scrolling-hall-red';
 				case 'its-a-song' | 'gimme' | 'boredom':
 					curStage = 'bully';
+				case 'dsci':
+					curStage = 'dsci';
 				default:
 					curStage = 'stage';
 			}
@@ -428,6 +435,7 @@ class PlayState extends MusicBeatState
 				girlfriend: [400, 130],
 				opponent: [100, 100],
 				hide_girlfriend: false,
+				hide_others: false,
 
 				camera_boyfriend: [0, 0],
 				camera_opponent: [0, 0],
@@ -562,7 +570,7 @@ class PlayState extends MusicBeatState
 				add(bg);
 			case 'bully':
 				var bg:BGSprite = new BGSprite('bully', -600, -200);
-				bg.scale.set(0.775, 0.775);
+				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
 				bg.antialiasing = false;
@@ -587,6 +595,50 @@ class PlayState extends MusicBeatState
 				bg.x += 95;
 				bg.y += 70;
 				add(bg);
+			case 'dsci':
+				var bg:BGSprite = new BGSprite('dscii/bg', -600, -200);
+				bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();
+				bg.screenCenter();
+				bg.scrollFactor.set();
+				bg.antialiasing = false;
+				add(bg);
+
+				dsciLeft = new BGSprite('dscii/left', -600, -200);
+				dsciLeft.scale.set(0.95, 0.95);
+				dsciLeft.updateHitbox();
+				dsciLeft.screenCenter();
+				dsciLeft.scrollFactor.set();
+				dsciLeft.antialiasing = false;
+				add(dsciLeft);
+				dsciLeft.visible = false;
+
+				dsciRight = new BGSprite('dscii/right', -600, -200);
+				dsciRight.scale.set(0.95, 0.95);
+				dsciRight.updateHitbox();
+				dsciRight.screenCenter();
+				dsciRight.scrollFactor.set();
+				dsciRight.antialiasing = false;
+				add(dsciRight);
+				dsciRight.visible = false;
+
+				dsciUp = new BGSprite('dscii/up', -600, -200);
+				dsciUp.scale.set(0.95, 0.95);
+				dsciUp.updateHitbox();
+				dsciUp.screenCenter();
+				dsciUp.scrollFactor.set();
+				dsciUp.antialiasing = false;
+				add(dsciUp);
+				dsciUp.visible = false;
+
+				dsciDown = new BGSprite('dscii/down', -600, -200);
+				dsciDown.scale.set(0.95, 0.95);
+				dsciDown.updateHitbox();
+				dsciDown.screenCenter();
+				dsciDown.scrollFactor.set();
+				dsciDown.antialiasing = false;
+				add(dsciDown);
+				dsciDown.visible = false;
 		}
 
 		if(isPixelStage) {
@@ -686,6 +738,12 @@ class PlayState extends MusicBeatState
 			dad.setPosition(GF_X, GF_Y);
 			if(gf != null)
 				gf.visible = false;
+		}
+
+		if(stageData.hide_others)
+		{
+			dadGroup.visible = false;
+			boyfriendGroup.visible = false;
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
@@ -2066,10 +2124,6 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}*/
 		callOnLuas('onUpdate', [elapsed]);
 
 		if(!inCutscene) {
@@ -2082,6 +2136,32 @@ class PlayState extends MusicBeatState
 				}
 			} else {
 				boyfriendIdleTime = 0;
+			}
+		}
+
+		if(dsciDown != null)
+		{
+			if(opponentStrums.members[3] != null)
+			{
+				if(opponentStrums.members[0].animation.curAnim.name != "confirm")
+				{
+					dsciLeft.visible = false;
+				}
+
+				if(opponentStrums.members[1].animation.curAnim.name != "confirm")
+				{
+					dsciDown.visible = false;
+				}
+
+				if(opponentStrums.members[2].animation.curAnim.name != "confirm")
+				{
+					dsciUp.visible = false;
+				}
+
+				if(opponentStrums.members[3].animation.curAnim.name != "confirm")
+				{
+					dsciRight.visible = false;
+				}
 			}
 		}
 
@@ -3580,6 +3660,21 @@ class PlayState extends MusicBeatState
 		}
 		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)), time);
 		note.hitByOpponent = true;
+
+		if(dsciDown != null)
+		{
+			switch(singAnimations[Std.int(Math.abs(note.noteData))].toLowerCase())
+			{
+				case 'singleft':
+					dsciLeft.visible = true;
+				case 'singdown':
+					dsciDown.visible = true;
+				case 'singup':
+					dsciUp.visible = true;
+				case 'singright':
+					dsciRight.visible = true;
+			}
+		}
 
 		callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
 

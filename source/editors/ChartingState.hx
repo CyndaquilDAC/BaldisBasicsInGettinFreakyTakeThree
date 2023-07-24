@@ -573,16 +573,8 @@ class ChartingState extends MusicBeatState
 		#end
 
 		tempMap.clear();
-		var stageFile:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 		var stages:Array<String> = [];
-		for (i in 0...stageFile.length) { //Prevent duplicates
-			var stageToCheck:String = stageFile[i];
-			if(!tempMap.exists(stageToCheck)) {
-				stages.push(stageToCheck);
-			}
-			tempMap.set(stageToCheck, true);
-		}
-		#if MODS_ALLOWED
+
 		for (i in 0...directories.length) {
 			var directory:String = directories[i];
 			if(FileSystem.exists(directory)) {
@@ -598,7 +590,6 @@ class ChartingState extends MusicBeatState
 				}
 			}
 		}
-		#end
 
 		if(stages.length < 1) stages.push('stage');
 
