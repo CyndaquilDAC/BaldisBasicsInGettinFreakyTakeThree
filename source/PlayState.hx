@@ -1460,14 +1460,9 @@ class PlayState extends MusicBeatState
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				introAssets.set('default', ['ready', 'set', 'go']);
-				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
 
 				var introAlts:Array<String> = introAssets.get('default');
 				var antialias:Bool = false;
-				if(isPixelStage) {
-					introAlts = introAssets.get('pixel');
-					antialias = false;
-				}
 
 				switch (swagCounter)
 				{
@@ -1521,18 +1516,26 @@ class PlayState extends MusicBeatState
 
 						if (PlayState.isPixelStage)
 							countdownGo.setGraphicSize(Std.int(countdownGo.width * daPixelZoom));
+						
+						countdownGo.scale.set(0.001, 0.001);
 
 						countdownGo.updateHitbox();
 
 						countdownGo.screenCenter();
 						countdownGo.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownGo);
-						FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownGo, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1000, {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
-								remove(countdownGo);
-								countdownGo.destroy();
+								FlxTween.tween(countdownGo, {y: countdownGo.y + 350, alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownGo);
+										countdownGo.destroy();
+									}
+								});
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);

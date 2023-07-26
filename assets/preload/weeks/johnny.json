@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Penny-Pinching", "dad", [146, 113, 253]],
-		["Filler", "dad", [146, 113, 253]],
-		["Say-Hi", "dad", [146, 113, 253]]
+		["Penny-Pinching", "johnny", [146, 113, 253]],
+		["Say-Hi", "johnny", [146, 113, 253]],
+		["Jerk", "johnny", [146, 113, 253]]
 	],
 
 	"weekCharacters": [
