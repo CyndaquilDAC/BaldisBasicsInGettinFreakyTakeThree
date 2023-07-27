@@ -13,7 +13,7 @@
 	"weekBackground": "stage",
 
 	"storyName": "Johnny's Shoppin' Showdown!",
-	"weekBefore": "pomp",
+	"weekBefore": "farming",
 	"weekName": "Johnny's Week",
 	"weekNameCode": "johnny",
 	"startUnlocked": true,
