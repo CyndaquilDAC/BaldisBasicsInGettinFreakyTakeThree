@@ -29,6 +29,7 @@ class TypedAlphabet extends Alphabet
 
 	private var _curLetter:Int = -1;
 	private var _timeToUpdate:Float = 0;
+
 	override function update(elapsed:Float)
 	{
 		if(!finishedText)
@@ -67,7 +68,6 @@ class TypedAlphabet extends Alphabet
 		for (i in start...(upTo+1))
 		{
 			if(letters[i] != null) letters[i].visible = true;
-			//trace('test, showing: $i');
 		}
 	}
 

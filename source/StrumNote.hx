@@ -10,22 +10,25 @@ class StrumNote extends FlxSprite
 	private var colorSwap:ColorSwap;
 	public var resetAnim:Float = 0;
 	private var noteData:Int = 0;
-	public var direction:Float = 90;//plan on doing scroll directions soon -bb
-	public var downScroll:Bool = false;//plan on doing scroll directions soon -bb
+	public var direction:Float = 90;
+	public var downScroll:Bool = false;
 	public var sustainReduce:Bool = true;
 	
 	private var player:Int;
 	
 	public var texture(default, set):String = null;
-	private function set_texture(value:String):String {
-		if(texture != value) {
+	private function set_texture(value:String):String
+	{
+		if(texture != value)
+		{
 			texture = value;
 			reloadNote();
 		}
 		return value;
 	}
 
-	public function new(x:Float, y:Float, leData:Int, player:Int) {
+	public function new(x:Float, y:Float, leData:Int, player:Int)
+	{
 		colorSwap = new ColorSwap();
 		shader = colorSwap.shader;
 		noteData = leData;
@@ -35,7 +38,7 @@ class StrumNote extends FlxSprite
 
 		var skin:String = 'NOTE_assets';
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
-		texture = skin; //Load texture and anims
+		texture = skin;
 
 		scrollFactor.set();
 	}

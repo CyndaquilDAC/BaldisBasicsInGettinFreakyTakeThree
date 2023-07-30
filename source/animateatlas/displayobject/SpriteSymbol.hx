@@ -25,7 +25,8 @@ import openfl.geom.Matrix;
 import openfl.geom.ColorTransform;
 import animateatlas.JSONData.FilterData;
 
-class SpriteSymbol extends Sprite {
+class SpriteSymbol extends Sprite
+{
 	public var currentLabel(get, never):String;
 	public var currentFrame(get, set):Int;
 	public var type(get, set):String;
@@ -56,7 +57,8 @@ class SpriteSymbol extends Sprite {
 
 	private static var sMatrix:Matrix = new Matrix();
 
-	private function new(data:SymbolData, library:SpriteAnimationLibrary, texture:BitmapData) {
+	private function new(data:SymbolData, library:SpriteAnimationLibrary, texture:BitmapData)
+	{
 		super();
 		_data = data;
 		_library = library;
@@ -72,15 +74,18 @@ class SpriteSymbol extends Sprite {
 		createLayers();
 
 		// Create FrameMap caches if don't exist
-		for (layer in data.TIMELINE.LAYERS) {
+		for (layer in data.TIMELINE.LAYERS)
+		{
 			if (layer.FrameMap != null)
 				return;
 
 			var map = new Map();
 
-			for (i in 0...layer.Frames.length) {
+			for (i in 0...layer.Frames.length)
+			{
 				var frame = layer.Frames[i];
-				for (j in 0...frame.duration) {
+				for (j in 0...frame.duration)
+				{
 					map.set(i + j, frame);
 				}
 			}
@@ -89,7 +94,8 @@ class SpriteSymbol extends Sprite {
 		}
 	}
 
-	public function reset():Void {
+	public function reset():Void
+	{
 		sMatrix.identity();
 		transform.matrix = sMatrix.clone();
 		alpha = 1.0;
@@ -97,16 +103,20 @@ class SpriteSymbol extends Sprite {
 		_composedFrame = -1;
 	}
 
-	public function nextFrame():Void {
-		if (_loopMode != LoopMode.SINGLE_FRAME) {
+	public function nextFrame():Void
+	{
+		if (_loopMode != LoopMode.SINGLE_FRAME)
+		{
 			currentFrame += 1;
 		}
 
 		moveMovieclip_MovieClips(1);
 	}
 
-	public function prevFrame():Void {
-		if (_loopMode != LoopMode.SINGLE_FRAME) {
+	public function prevFrame():Void
+	{
+		if (_loopMode != LoopMode.SINGLE_FRAME)
+		{
 			currentFrame -= 1;
 		}
 
@@ -114,23 +124,29 @@ class SpriteSymbol extends Sprite {
 	}
 
 	/** Moves all movie clips n frames, recursively. */
-	private function moveMovieclip_MovieClips(direction:Int = 1):Void {
-		if (_type == SymbolType.MOVIE_CLIP) {
+	private function moveMovieclip_MovieClips(direction:Int = 1):Void
+	{
+		if (_type == SymbolType.MOVIE_CLIP)
+		{
 			currentFrame += direction;
 		}
 
-		for (l in 0..._numLayers) {
+		for (l in 0..._numLayers)
+		{
 			var layer:Sprite = getLayer(l);
 			var numElements:Int = layer.numChildren;
 
-			for (e in 0...numElements) {
+			for (e in 0...numElements)
+			{
 				(try cast(layer.getChildAt(e), SpriteSymbol) catch (e:Dynamic) null).moveMovieclip_MovieClips(direction);
 			}
 		}
 	}
 
-	public function update():Void {
-		for (i in 0..._numLayers) {
+	public function update():Void
+	{
+		for (i in 0..._numLayers)
+		{
 			updateLayer(i);
 		}
 
@@ -138,19 +154,21 @@ class SpriteSymbol extends Sprite {
 	}
 
 	@:access(animateatlas)
-	private function updateLayer(layerIndex:Int):Void {
+	private function updateLayer(layerIndex:Int):Void
+	{
 		var layer:Sprite = getLayer(layerIndex);
 		var frameData:LayerFrameData = getFrameData(layerIndex, _currentFrame);
 		var elements:Array<ElementData> = (frameData != null) ? frameData.elements : null;
 		var numElements:Int = (elements != null) ? elements.length : 0;
-		for (i in 0...numElements) {
+		for (i in 0...numElements)
+		{
 			var elementData:SymbolInstanceData = elements[i].SYMBOL_Instance;
 
-			if (elementData == null) {
+			if (elementData == null)
+			{
 				continue;
 			}
 
-			// this is confusing but needed :(
 			var oldSymbol:SpriteSymbol = (layer.numChildren > i) ? try
 				cast(layer.getChildAt(i), SpriteSymbol)
 			catch (e:Dynamic)
@@ -160,14 +178,19 @@ class SpriteSymbol extends Sprite {
 
 			var symbolName:String = elementData.SYMBOL_name;
 
-			if (!_library.hasSymbol(symbolName)) {
+			if (!_library.hasSymbol(symbolName))
+			{
 				symbolName = SpriteAnimationLibrary.BITMAP_SYMBOL_NAME;
 			}
 
-			if (oldSymbol != null && oldSymbol._symbolName == symbolName) {
+			if (oldSymbol != null && oldSymbol._symbolName == symbolName)
+			{
 				newSymbol = oldSymbol;
-			} else {
-				if (oldSymbol != null) {
+			}
+			else
+			{
+				if (oldSymbol != null)
+				{
 					if (oldSymbol.parent != null)
 						oldSymbol.removeChild(oldSymbol);
 					_library.putSymbol(oldSymbol);
@@ -183,46 +206,57 @@ class SpriteSymbol extends Sprite {
 			newSymbol.setColor(elementData.color);
 			newSymbol.setLoop(elementData.loop);
 			newSymbol.setType(elementData.symbolType);
-			
-		
 
-			if (newSymbol.type == SymbolType.GRAPHIC) {
+			if (newSymbol.type == SymbolType.GRAPHIC)
+			{
 				var firstFrame:Int = elementData.firstFrame;
 				var frameAge:Int = Std.int(_currentFrame - frameData.index);
 
-				if (newSymbol.loopMode == LoopMode.SINGLE_FRAME) {
+				if (newSymbol.loopMode == LoopMode.SINGLE_FRAME)
+				{
 					newSymbol.currentFrame = firstFrame;
-				} else if (newSymbol.loopMode == LoopMode.LOOP) {
+				}
+				else if (newSymbol.loopMode == LoopMode.LOOP)
+				{
 					newSymbol.currentFrame = (firstFrame + frameAge) % newSymbol._numFrames;
-				} else {
+				}
+				else
+				{
 					newSymbol.currentFrame = firstFrame + frameAge;
 				}
 			}
-			
 		}
 
 		var numObsoleteSymbols:Int = (layer.numChildren - numElements);
 
-		for (i in 0...numObsoleteSymbols) {
-			try {
+		for (i in 0...numObsoleteSymbols)
+		{
+			try
+			{
 				var oldSymbol = cast(layer.removeChildAt(numElements), SpriteSymbol);
 				if (oldSymbol != null)
 					_library.putSymbol(oldSymbol);
-			} catch (e:Dynamic) {};
+			}
+			catch (e:Dynamic) {};
 		}
 	}
 
-	private function createLayers():Void {
-		// todo safety check for not initialiing twice
-		if (_layers != null) {
+	private function createLayers():Void
+	{
+		if (_layers != null)
+		{
 			throw new Error("You must not call this twice");
 		}
 		_layers = new Array<Sprite>();
 
-		if (_numLayers <= 1) {
+		if (_numLayers <= 1)
+		{
 			_layers.push(this);
-		} else {
-			for (i in 0..._numLayers) {
+		}
+		else
+		{
+			for (i in 0..._numLayers)
+			{
 				var layer:Sprite = new Sprite();
 				layer.name = getLayerData(i).Layer_name;
 				addChild(layer);
@@ -232,86 +266,79 @@ class SpriteSymbol extends Sprite {
 	}
 
 	@:access(animateatlas)
-	public function setBitmap(data:BitmapPosData):Void {
-		if (data != null) {
+	public function setBitmap(data:BitmapPosData):Void
+	{
+		if (data != null)
+		{
 			var spriteData = _library.getSpriteData(data.name + "");
 
-			if (_bitmap == null) {
+			if (_bitmap == null)
+			{
 				_bitmap = new Bitmap(new BitmapData(1, 1), PixelSnapping.AUTO, smoothing);
 				addChild(_bitmap);
 			}
 
-			if (_tempRect.x != spriteData.x || _tempRect.y != spriteData.y || _tempRect.width != spriteData.w || _tempRect.height != spriteData.h) {
+			if (_tempRect.x != spriteData.x || _tempRect.y != spriteData.y || _tempRect.width != spriteData.w || _tempRect.height != spriteData.h)
+			{
 				var clippedTexture = new BitmapData(spriteData.w, spriteData.h);
 				_tempRect.setTo(spriteData.x, spriteData.y, spriteData.w, spriteData.h);
 				clippedTexture.copyPixels(_texture, _tempRect, _zeroPoint);
 				_bitmap.bitmapData = clippedTexture;
 				_bitmap.smoothing = smoothing;
-				
-	
 			}
-			// aditional checks for rotation
-			if (spriteData.rotated) {
+
+			if (spriteData.rotated)
+			{
 				_bitmap.rotation = -90;
 				_bitmap.x = data.Position.x;
 				_bitmap.y = data.Position.y + spriteData.w;
-			} else {
+			}
+			else
+			{
 				_bitmap.rotation = 0;
 				_bitmap.x = data.Position.x;
 				_bitmap.y = data.Position.y;
 			}
 
 			addChildAt(_bitmap, 0);
-		} else if (_bitmap != null) {
+		}
+		else if (_bitmap != null)
+		{
 			if (_bitmap.parent != null)
 				_bitmap.parent.removeChild(_bitmap);
 		}
 	}
+
 	@:access(animateatlas)
-	private function setFilterData(data:FilterData):Void{
+	private function setFilterData(data:FilterData):Void
+	{
 		var blur:BlurFilter;
 		var glow:GlowFilter;
-		if (data != null){
-			if (data.BlurFilter != null){
+		if (data != null)
+		{
+			if (data.BlurFilter != null)
+			{
 				blur = new BlurFilter();
 				blur.blurX = data.BlurFilter.blurX;
 				blur.blurY = data.BlurFilter.blurY;
 				blur.quality = data.BlurFilter.quality;
-				//_bitmap.bitmapData.applyFilter(_bitmap.bitmapData,new Rectangle(0,0,_bitmap.bitmapData.width,_bitmap.bitmapData.height),new Point(0,0),blur);
-				//filters.push(blur);
 			}
-			if (data.GlowFilter != null){
-				//trace('GLOW' + data.GlowFilter);
-				//glow = new GlowFilter();
-				//glow.blurX = data.GlowFilter.blurX;
-				//glow.blurY = data.GlowFilter.blurY;
-				//glow.color = data.GlowFilter.color;
-				//glow.alpha = data.GlowFilter.alpha;
-				//glow.quality = data.GlowFilter.quality;
-				//glow.strength = data.GlowFilter.strength;
-				//glow.knockout = data.GlowFilter.knockout;
-				//glow.inner = data.GlowFilter.inner;
-				//filters.push(glow);
-
-
-
-
-			}
-
 		}
-		
 	}
 
-	private function setTransformationMatrix(data:Matrix3DData):Void {
+	private function setTransformationMatrix(data:Matrix3DData):Void
+	{
 		sMatrix.setTo(data.m00, data.m01, data.m10, data.m11, data.m30, data.m31);
 		if (sMatrix.a != transform.matrix.a || sMatrix.b != transform.matrix.b || sMatrix.c != transform.matrix.c || sMatrix.d != transform.matrix.d
 			|| sMatrix.tx != transform.matrix.tx || sMatrix.ty != transform.matrix.ty)
-			transform.matrix = sMatrix.clone(); // todo stop the cloning :(
+			transform.matrix = sMatrix.clone();
 	}
 
-	private function setColor(data:ColorData):Void {
+	private function setColor(data:ColorData):Void
+	{
 		var newTransform = new ColorTransform();
-		if (data != null) {
+		if (data != null)
+		{
 			newTransform.redOffset = (data.redOffset == null ? 0 : data.redOffset);
 			newTransform.greenOffset = (data.greenOffset == null ? 0 : data.greenOffset);
 			newTransform.blueOffset = (data.blueOffset == null ? 0 : data.blueOffset);
@@ -323,37 +350,46 @@ class SpriteSymbol extends Sprite {
 			newTransform.alphaMultiplier = (data.alphaMultiplier == null ? 1 : data.alphaMultiplier);
 		}
 		transform.colorTransform = newTransform;
-		
 	}
 
-	private function setLoop(data:String):Void {
-		if (data != null) {
+	private function setLoop(data:String):Void
+	{
+		if (data != null)
+		{
 			_loopMode = data;
-		} else {
+		}
+		else
+		{
 			_loopMode = LoopMode.LOOP;
 		}
 	}
 
-	private function setType(data:String):Void {
-		if (data != null) {
+	private function setType(data:String):Void
+	{
+		if (data != null)
+		{
 			_type = data;
 		}
 	}
 
-	private function getNumFrames():Int {
+	private function getNumFrames():Int
+	{
 		var numFrames:Int = 0;
 
-		for (i in 0..._numLayers) {
+		for (i in 0..._numLayers)
+		{
 			var layer = getLayerData(i);
 			var frameDates:Array<LayerFrameData> = (layer == null ? [] : layer.Frames);
 			var numFrameDates:Int = (frameDates != null) ? frameDates.length : 0;
 			var layerNumFrames:Int = (numFrameDates != 0) ? frameDates[0].index : 0;
 
-			for (j in 0...numFrameDates) {
+			for (j in 0...numFrameDates)
+			{
 				layerNumFrames += frameDates[j].duration;
 			}
 
-			if (layerNumFrames > numFrames) {
+			if (layerNumFrames > numFrames)
+			{
 				numFrames = layerNumFrames;
 			}
 		}
@@ -361,17 +397,21 @@ class SpriteSymbol extends Sprite {
 		return numFrames == 0 ? 1 : numFrames;
 	}
 
-	private function _getFrameLabels():Array<FrameLabel> {
+	private function _getFrameLabels():Array<FrameLabel>
+	{
 		var labels:Array<FrameLabel> = [];
 
-		for (i in 0..._numLayers) {
+		for (i in 0..._numLayers)
+		{
 			var layer = getLayerData(i);
 			var frameDates:Array<LayerFrameData> = (layer == null ? [] : layer.Frames);
 			var numFrameDates:Int = (frameDates != null) ? frameDates.length : 0;
 
-			for (j in 0...numFrameDates) {
+			for (j in 0...numFrameDates)
+			{
 				var frameData:LayerFrameData = frameDates[j];
-				if (frameData.name != null) {
+				if (frameData.name != null)
+				{
 					labels.push(new FrameLabel(frameData.name, frameData.index));
 				}
 			}
@@ -380,13 +420,13 @@ class SpriteSymbol extends Sprite {
 		return labels;
 	}
 
-	public function getFrameLabels():Array<String> {
+	public function getFrameLabels():Array<String>
+	{
 		return _frameLabels.map(f -> f.name); // Inlining. I feel a js
 	}
 
-
-
-	function sortLabels(i1:FrameLabel, i2:FrameLabel):Int {
+	function sortLabels(i1:FrameLabel, i2:FrameLabel):Int
+	{
 		var f1 = i1.frame;
 		var f2 = i2.frame;
 		if (f1 < f2) {

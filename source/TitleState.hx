@@ -32,6 +32,7 @@ import flixel.util.FlxTimer;
 import openfl.Assets;
 
 using StringTools;
+
 typedef TitleData =
 {
 
@@ -44,6 +45,7 @@ typedef TitleData =
 	backgroundSprite:String,
 	bpm:Int
 }
+
 class TitleState extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
@@ -76,7 +78,6 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();
 
 		FlxG.game.focusLostFramerate = 60;
@@ -89,9 +90,8 @@ class TitleState extends MusicBeatState
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
-		// DEBUG BULLSHIT
-
 		swagShader = new ColorSwap();
+
 		super.create();
 
 		FlxG.save.bind('funkin', CoolUtil.getSavePath());
@@ -100,7 +100,6 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
-		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
 
 		if(!initialized)
@@ -120,11 +119,14 @@ class TitleState extends MusicBeatState
 
 		FlxG.mouse.visible = false;
 
-		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
+		if(FlxG.save.data.flashing == null && !FlashingState.leftState)
+		{
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new FlashingState());
-		} else {
+		}
+		else
+		{
 			if (initialized)
 				startIntro();
 			else
@@ -147,7 +149,8 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			if(FlxG.sound.music == null) {
+			if(FlxG.sound.music == null)
+			{
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 			}
 		}
