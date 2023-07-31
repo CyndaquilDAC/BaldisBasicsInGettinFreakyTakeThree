@@ -418,6 +418,8 @@ class PlayState extends MusicBeatState
 					curStage = 'bully';
 				case 'dsci':
 					curStage = 'dsci';
+				case 'forgotten':
+					curStage = '0th-prize';
 				default:
 					curStage = 'stage';
 			}
@@ -595,6 +597,10 @@ class PlayState extends MusicBeatState
 				bg.x += 95;
 				bg.y += 70;
 				add(bg);
+			case '0th-prize':
+				var bg:BGSprite = new BGSprite('0th prize', -621, -357);
+				bg.antialiasing = false;
+				add(bg);
 			case 'dsci':
 				var bg:BGSprite = new BGSprite('dscii/bg', -600, -200);
 				bg.scale.set(0.95, 0.95);
@@ -743,6 +749,11 @@ class PlayState extends MusicBeatState
 		if(stageData.hide_others)
 		{
 			dadGroup.visible = false;
+			boyfriendGroup.visible = false;
+		}
+
+		if(curStage.toLowerCase() == '0th-prize' || curStage.toLowerCase() == 'closet')
+		{
 			boyfriendGroup.visible = false;
 		}
 
