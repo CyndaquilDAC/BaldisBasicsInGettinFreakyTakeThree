@@ -3954,6 +3954,14 @@ class PlayState extends MusicBeatState
 					case 254:
 						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backIn});
 				}
+			case 'its-a-song':
+				switch(curBeat)
+				{
+					case 98:
+						FlxTween.tween(jackhammerWarning, {y: 460}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backOut});
+					case 132:
+						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backIn});
+				}
 		}
 
 		lastBeatHit = curBeat;
