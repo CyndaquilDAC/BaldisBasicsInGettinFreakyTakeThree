@@ -297,6 +297,8 @@ class PlayState extends MusicBeatState
 	var dsciUp:BGSprite;
 	var dsciRight:BGSprite;
 
+	var songIsMiddleScrolled:Bool = false;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -420,6 +422,8 @@ class PlayState extends MusicBeatState
 					curStage = 'dsci';
 				case 'forgotten':
 					curStage = '0th-prize';
+				case 'supplies':
+					curStage = 'closet';
 				default:
 					curStage = 'stage';
 			}
@@ -562,14 +566,11 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'closet':
-				var bg:BGSprite = new BGSprite('closet', -600, -200);
+				var bg:BGSprite = new BGSprite('closet', -591, -399);
 				bg.scale.set(0.95, 0.95);
-				bg.updateHitbox();
-				bg.screenCenter();
 				bg.antialiasing = false;
-				bg.x += 95;
-				bg.y += 70;
 				add(bg);
+				songIsMiddleScrolled = true;
 			case 'bully':
 				var bg:BGSprite = new BGSprite('bully', -600, -200);
 				bg.scale.set(0.95, 0.95);
@@ -601,6 +602,7 @@ class PlayState extends MusicBeatState
 				var bg:BGSprite = new BGSprite('0th prize', -621, -357);
 				bg.antialiasing = false;
 				add(bg);
+				songIsMiddleScrolled = true;
 			case 'dsci':
 				var bg:BGSprite = new BGSprite('dscii/bg', -600, -200);
 				bg.scale.set(0.95, 0.95);
@@ -645,6 +647,8 @@ class PlayState extends MusicBeatState
 				dsciDown.antialiasing = false;
 				add(dsciDown);
 				dsciDown.visible = false;
+
+				songIsMiddleScrolled = true;
 		}
 
 		if(isPixelStage) {
@@ -876,7 +880,7 @@ class PlayState extends MusicBeatState
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
 		if(ClientPrefs.downScroll) {
-			botplayTxt.y = 27 - 78;
+			botplayTxt.y = FlxG.height - 56;
 		}
 
 		add(timeTxt);
@@ -1567,6 +1571,10 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+						if(songIsMiddleScrolled && !ClientPrefs.middleScroll)
+						{
+							middleScrollify();
+						}
 					case 4:
 				}
 
@@ -1585,6 +1593,50 @@ class PlayState extends MusicBeatState
 				swagCounter += 1;
 				// generateSong('fresh');
 			}, 5);
+		}
+	}
+
+	public function middleScrollify()
+	{
+		if(ClientPrefs.downScroll)
+		{
+			FlxTween.tween(botplayTxt, {y: FlxG.height - 34}, Conductor.crochet / 500, {ease: FlxEase.cubeOut});
+		}
+		else
+		{
+			FlxTween.tween(botplayTxt, {y: 0}, Conductor.crochet / 500, {ease: FlxEase.cubeOut});
+		}
+
+		for(i in opponentStrums.members)
+		{
+			FlxTween.tween(i, {x: i.x - 575}, Conductor.crochet / 500, {ease: FlxEase.cubeOut});
+		}
+
+		for(i in playerStrums.members)
+		{
+			FlxTween.tween(i, {x: i.x + -320}, Conductor.crochet / 500, {ease: FlxEase.cubeOut});
+		}
+	}
+
+	public function deMiddleScrollify()
+	{
+		if(ClientPrefs.downScroll)
+		{
+			FlxTween.tween(botplayTxt, {y: FlxG.height - 56}, Conductor.crochet / 500, {ease: FlxEase.cubeIn});
+		}
+		else
+		{
+			FlxTween.tween(botplayTxt, {y: 27 + 55}, Conductor.crochet / 500, {ease: FlxEase.cubeIn});
+		}
+
+		for(i in opponentStrums.members)
+		{
+			FlxTween.tween(i, {x: i.x + 575}, Conductor.crochet / 500, {ease: FlxEase.cubeIn});
+		}
+		
+		for(i in playerStrums.members)
+		{
+			FlxTween.tween(i, {x: i.x - -320}, Conductor.crochet / 500, {ease: FlxEase.cubeIn});
 		}
 	}
 
