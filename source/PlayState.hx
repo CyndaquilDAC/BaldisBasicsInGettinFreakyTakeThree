@@ -173,10 +173,12 @@ class PlayState extends MusicBeatState
 	public var playerStrums:FlxTypedGroup<StrumNote>;
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
-	public var camZooming:Bool = false;
+	public var camZooming:Bool = true;
 	public var camZoomingMult:Float = 1;
 	public var camZoomingDecay:Float = 1;
 	private var curSong:String = "";
+
+	public var duetCamAdd:Float = 0;
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
@@ -2376,11 +2378,8 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (camZooming)
-		{
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
-		}
+		FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom + duetCamAdd, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
+		camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
@@ -2960,8 +2959,29 @@ class PlayState extends MusicBeatState
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
 
-	function moveCameraSection():Void {
+	function moveCameraSection():Void
+	{
 		if(SONG.notes[curSection] == null) return;
+
+		if(SONG.notes[curSection].coolDuetCam)
+		{
+			duetCamAdd = -0.025;
+			camFollow.set((dad.getMidpoint().x) + (boyfriend.getMidpoint().x) / 2, (dad.getMidpoint().y - 100));
+			/*if(!SONG.notes[curSection].mustHitSection)
+			{
+				camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
+				camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
+				callOnLuas('onMoveCamera', ['dad']);
+			}
+			else
+			{
+				camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
+				camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
+				callOnLuas('onMoveCamera', ['boyfriend']);
+			}*/
+			return;
+		}
+		duetCamAdd = 0;
 
 		if (gf != null && SONG.notes[curSection].gfSection)
 		{
@@ -4037,6 +4057,16 @@ class PlayState extends MusicBeatState
 
 		switch(curSong.toLowerCase())
 		{
+			case 'basically-sing':
+				switch(curBeat)
+				{
+					case 63:
+						defaultCamZoom += 0.35;
+					case 64:
+						defaultCamZoom -= 0.15;
+					case 160:
+						defaultCamZoom -= 0.2;
+				}
 			case 'dsci':
 				switch(curBeat)
 				{
@@ -4072,7 +4102,7 @@ class PlayState extends MusicBeatState
 				moveCameraSection();
 			}
 
-			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms)
+			if (FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms)
 			{
 				FlxG.camera.zoom += 0.015 * camZoomingMult;
 				camHUD.zoom += 0.03 * camZoomingMult;
