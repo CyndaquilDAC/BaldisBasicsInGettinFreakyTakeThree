@@ -166,7 +166,7 @@
 			"name": "bf pre attack"
 		}
 	],
-	"no_antialiasing": false,
+	"no_antialiasing": true,
 	"image": "characters/BOYFRIEND",
 	"position": [
 		0,

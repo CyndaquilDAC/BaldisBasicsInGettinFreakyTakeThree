@@ -2917,16 +2917,8 @@ class PlayState extends MusicBeatState
 		{
 			duetCamAdd = -0.05;
 
-			if(gf != null)
-			{
-				camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
-				camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
-				camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
-			}
-			else
-			{
-				camFollow.set((dad.getMidpoint().x) + (boyfriend.getMidpoint().x) / 2, (dad.getMidpoint().y - 100));
-			}
+			camFollow.set(boyfriend.getMidpoint().x - 385, dad.getMidpoint().y - 75);
+			//camFollow.set((dad.getMidpoint().x) + (boyfriend.getMidpoint().x) / 2, (dad.getMidpoint().y - 100));
 
 			return;
 		}
@@ -3980,7 +3972,7 @@ class PlayState extends MusicBeatState
 					case 254:
 						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backIn});
 				}
-			case 'its-a-song':
+			case 'this-is-a-song':
 				switch(curBeat)
 				{
 					case 98:
