@@ -19,12 +19,6 @@ import haxe.io.Path;
 class LoadingState extends MusicBeatState
 {
 	inline static var MIN_TIME = 1.0;
-
-	// Browsers will load create(), you can make your song load a custom directory there
-	// If you're compiling to desktop (or something that doesn't use NO_PRELOAD_ALL), search for getNextState instead
-	// I'd recommend doing it on both actually lol
-	
-	// TO DO: Make this easier
 	
 	var target:FlxState;
 	var stopMusic = false;
@@ -65,13 +59,10 @@ class LoadingState extends MusicBeatState
 			{
 				callbacks = new MultiCallback(onLoad);
 				var introComplete = callbacks.add("introComplete");
-				/*if (PlayState.SONG != null) {
-					checkLoadSong(getSongPath());
-					if (PlayState.SONG.needsVoices)
-						checkLoadSong(getVocalPath());
-				}*/
+
 				checkLibrary("shared");
-				if(directory != null && directory.length > 0 && directory != 'shared') {
+				if(directory != null && directory.length > 0 && directory != 'shared')
+				{
 					checkLibrary(directory);
 				}
 
@@ -88,16 +79,13 @@ class LoadingState extends MusicBeatState
 		{
 			var library = Assets.getLibrary("songs");
 			final symbolPath = path.split(":").pop();
-			// @:privateAccess
-			// library.types.set(symbolPath, SOUND);
-			// @:privateAccess
-			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
 			var callback = callbacks.add("song:" + path);
 			Assets.loadSound(path).onComplete(function (_) { callback(); });
 		}
 	}
 	
-	function checkLibrary(library:String) {
+	function checkLibrary(library:String)
+	{
 		trace(Assets.hasLibrary(library));
 		if (Assets.getLibrary(library) == null)
 		{

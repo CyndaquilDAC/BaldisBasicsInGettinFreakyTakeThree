@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="baldi_fnf_new_good_edition.png">
+<TextureAtlas imagePath="baldi_fnf_new_mad_edition.png">
 	<!-- Created with Adobe Animate version 22.0.0.93 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="down0000" x="8" y="8" width="675" height="825"/>
-	<SubTexture name="down0001" x="8" y="8" width="675" height="825"/>
-	<SubTexture name="down0002" x="8" y="841" width="675" height="825"/>
-	<SubTexture name="down0003" x="8" y="841" width="675" height="825"/>
-	<SubTexture name="down0004" x="8" y="1674" width="675" height="825"/>
-	<SubTexture name="down0005" x="8" y="1674" width="675" height="825"/>
-	<SubTexture name="down0006" x="8" y="1674" width="675" height="825"/>
-	<SubTexture name="down0007" x="8" y="1674" width="675" height="825"/>
-	<SubTexture name="down0008" x="8" y="1674" width="675" height="825"/>
-	<SubTexture name="down0009" x="8" y="1674" width="675" height="825"/>
-	<SubTexture name="down0010" x="8" y="2507" width="675" height="825"/>
-	<SubTexture name="down0011" x="8" y="2507" width="675" height="825"/>
-	<SubTexture name="down0012" x="8" y="3340" width="675" height="825"/>
-	<SubTexture name="down0013" x="8" y="3340" width="675" height="825"/>
-	<SubTexture name="idle0000" x="8" y="4173" width="675" height="825"/>
-	<SubTexture name="idle0001" x="8" y="4173" width="675" height="825"/>
-	<SubTexture name="idle0002" x="8" y="5006" width="675" height="825"/>
-	<SubTexture name="idle0003" x="8" y="5006" width="675" height="825"/>
-	<SubTexture name="idle0004" x="8" y="5839" width="675" height="825"/>
-	<SubTexture name="idle0005" x="8" y="5839" width="675" height="825"/>
-	<SubTexture name="idle0006" x="8" y="6672" width="675" height="825"/>
-	<SubTexture name="idle0007" x="8" y="6672" width="675" height="825"/>
-	<SubTexture name="idle0008" x="691" y="8" width="675" height="825"/>
-	<SubTexture name="idle0009" x="691" y="8" width="675" height="825"/>
-	<SubTexture name="idle0010" x="691" y="8" width="675" height="825"/>
-	<SubTexture name="idle0011" x="691" y="8" width="675" height="825"/>
-	<SubTexture name="idle0012" x="691" y="8" width="675" height="825"/>
-	<SubTexture name="idle0013" x="691" y="8" width="675" height="825"/>
+	<SubTexture name="down0000" x="8" y="4173" width="675" height="825"/>
+	<SubTexture name="down0001" x="8" y="4173" width="675" height="825"/>
+	<SubTexture name="down0002" x="8" y="5006" width="675" height="825"/>
+	<SubTexture name="down0003" x="8" y="5006" width="675" height="825"/>
+	<SubTexture name="down0004" x="8" y="5839" width="675" height="825"/>
+	<SubTexture name="down0005" x="8" y="5839" width="675" height="825"/>
+	<SubTexture name="down0006" x="8" y="5839" width="675" height="825"/>
+	<SubTexture name="down0007" x="8" y="5839" width="675" height="825"/>
+	<SubTexture name="down0008" x="8" y="5839" width="675" height="825"/>
+	<SubTexture name="down0009" x="8" y="5839" width="675" height="825"/>
+	<SubTexture name="down0010" x="8" y="6672" width="675" height="825"/>
+	<SubTexture name="down0011" x="8" y="6672" width="675" height="825"/>
+	<SubTexture name="down0012" x="691" y="8" width="675" height="825"/>
+	<SubTexture name="down0013" x="691" y="8" width="675" height="825"/>
+	<SubTexture name="idle0000" x="8" y="8" width="675" height="825"/>
+	<SubTexture name="idle0001" x="8" y="8" width="675" height="825"/>
+	<SubTexture name="idle0002" x="8" y="841" width="675" height="825"/>
+	<SubTexture name="idle0003" x="8" y="841" width="675" height="825"/>
+	<SubTexture name="idle0004" x="8" y="1674" width="675" height="825"/>
+	<SubTexture name="idle0005" x="8" y="1674" width="675" height="825"/>
+	<SubTexture name="idle0006" x="8" y="2507" width="675" height="825"/>
+	<SubTexture name="idle0007" x="8" y="2507" width="675" height="825"/>
+	<SubTexture name="idle0008" x="8" y="3340" width="675" height="825"/>
+	<SubTexture name="idle0009" x="8" y="3340" width="675" height="825"/>
+	<SubTexture name="idle0010" x="8" y="3340" width="675" height="825"/>
+	<SubTexture name="idle0011" x="8" y="3340" width="675" height="825"/>
+	<SubTexture name="idle0012" x="8" y="3340" width="675" height="825"/>
+	<SubTexture name="idle0013" x="8" y="3340" width="675" height="825"/>
 	<SubTexture name="left0000" x="691" y="841" width="675" height="825"/>
 	<SubTexture name="left0001" x="691" y="841" width="675" height="825"/>
 	<SubTexture name="left0002" x="691" y="1674" width="675" height="825"/>

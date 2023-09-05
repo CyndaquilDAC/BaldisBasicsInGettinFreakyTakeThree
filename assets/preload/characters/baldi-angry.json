@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				17,
-				3
+				10,
+				0
 			],
 			"loop": false,
 			"fps": 24,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				-24,
-				1
+				-113,
+				15
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,8 +35,8 @@
 		},
 		{
 			"offsets": [
-				-24,
-				43
+				10,
+				40
 			],
 			"loop": false,
 			"fps": 24,
@@ -46,8 +46,8 @@
 		},
 		{
 			"offsets": [
-				-100,
-				1
+				9,
+				-5
 			],
 			"loop": false,
 			"fps": 24,
@@ -57,22 +57,22 @@
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/bbigf_bf_text",
+	"image": "characters/baldi_mad",
 	"position": [
-		0,
-		0
+		-160,
+		-140
 	],
-	"healthicon": "bf-yctp",
-	"flip_x": true,
+	"healthicon": "baldi",
+	"flip_x": false,
 	"healthbar_colors": [
-		49,
-		176,
-		209
+		44,
+		188,
+		49
 	],
 	"camera_position": [
-		0,
-		0
+		-40,
+		-160
 	],
-	"sing_duration": 4,
-	"scale": 1
+	"sing_duration": 6,
+	"scale": 1.5
 }

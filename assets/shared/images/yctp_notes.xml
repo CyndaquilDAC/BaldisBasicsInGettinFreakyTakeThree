@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="yctp_notes.png">
+	<!-- Created with Adobe Animate version 22.0.0.93 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="arrowDOWN0000" x="680" y="8" width="150" height="150"/>
+	<SubTexture name="arrowLEFT0000" x="838" y="8" width="150" height="150"/>
+	<SubTexture name="arrowRIGHT0000" x="680" y="166" width="150" height="150"/>
+	<SubTexture name="arrowUP0000" x="838" y="166" width="150" height="150"/>
+	<SubTexture name="blue0000" x="8" y="176" width="150" height="150"/>
+	<SubTexture name="blue hold end0000" x="304" y="334" width="100" height="100"/>
+	<SubTexture name="blue hold piece0000" x="412" y="334" width="100" height="100"/>
+	<SubTexture name="down confirm0000" x="8" y="8" width="160" height="160"/>
+	<SubTexture name="down press0000" x="640" y="324" width="140" height="140"/>
+	<SubTexture name="green0000" x="166" y="176" width="150" height="150"/>
+	<SubTexture name="green hold end0000" x="520" y="334" width="100" height="100"/>
+	<SubTexture name="green hold piece0000" x="304" y="442" width="100" height="100"/>
+	<SubTexture name="left confirm0000" x="176" y="8" width="160" height="160"/>
+	<SubTexture name="left press0000" x="788" y="324" width="140" height="140"/>
+	<SubTexture name="pruple end hold0000" x="412" y="442" width="100" height="100"/>
+	<SubTexture name="purple0000" x="324" y="176" width="150" height="150"/>
+	<SubTexture name="purple hold piece0000" x="520" y="442" width="100" height="100"/>
+	<SubTexture name="red0000" x="482" y="176" width="150" height="150"/>
+	<SubTexture name="red hold end0000" x="628" y="472" width="100" height="100"/>
+	<SubTexture name="red hold piece0000" x="736" y="472" width="100" height="100"/>
+	<SubTexture name="right confirm0000" x="344" y="8" width="160" height="160"/>
+	<SubTexture name="right press0000" x="8" y="334" width="140" height="140"/>
+	<SubTexture name="up confirm0000" x="512" y="8" width="160" height="160"/>
+	<SubTexture name="up press0000" x="156" y="334" width="140" height="140"/>
+</TextureAtlas>

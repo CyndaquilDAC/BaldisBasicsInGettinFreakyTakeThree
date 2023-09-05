@@ -6,7 +6,7 @@ import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
-import flixel.system.FlxSound;
+import flixel.sound.FlxSound;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -85,25 +85,35 @@ class CoolUtil
 
 		return daList;
 	}
-	public static function dominantColor(sprite:flixel.FlxSprite):Int{
+	public static function dominantColor(sprite:flixel.FlxSprite):Int
+	{
 		var countByColor:Map<Int, Int> = [];
-		for(col in 0...sprite.frameWidth){
-			for(row in 0...sprite.frameHeight){
-			  var colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
-			  if(colorOfThisPixel != 0){
-				  if(countByColor.exists(colorOfThisPixel)){
-				    countByColor[colorOfThisPixel] =  countByColor[colorOfThisPixel] + 1;
-				  }else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687)){
-					 countByColor[colorOfThisPixel] = 1;
-				  }
-			  }
+		for(col in 0...sprite.frameWidth)
+		{
+			for(row in 0...sprite.frameHeight)
+			{
+				var colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
+				if(colorOfThisPixel != 0)
+				{
+					if(countByColor.exists(colorOfThisPixel))
+					{
+						countByColor[colorOfThisPixel] =  countByColor[colorOfThisPixel] + 1;
+					}
+					else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687))
+					{
+						countByColor[colorOfThisPixel] = 1;
+					}
+				}
 			}
-		 }
+		}
+		
 		var maxCount = 0;
 		var maxKey:Int = 0;//after the loop this will store the max color
 		countByColor[flixel.util.FlxColor.BLACK] = 0;
-			for(key in countByColor.keys()){
-			if(countByColor[key] >= maxCount){
+		for(key in countByColor.keys())
+		{
+			if(countByColor[key] >= maxCount)
+			{
 				maxCount = countByColor[key];
 				maxKey = key;
 			}
@@ -122,15 +132,18 @@ class CoolUtil
 	}
 
 	//uhhhh does this even work at all? i'm starting to doubt
-	public static function precacheSound(sound:String, ?library:String = null):Void {
+	public static function precacheSound(sound:String, ?library:String = null):Void
+	{
 		Paths.sound(sound, library);
 	}
 
-	public static function precacheMusic(sound:String, ?library:String = null):Void {
+	public static function precacheMusic(sound:String, ?library:String = null):Void
+	{
 		Paths.music(sound, library);
 	}
 
-	public static function browserLoad(site:String) {
+	public static function browserLoad(site:String)
+	{
 		#if linux
 		Sys.command('/usr/bin/xdg-open', [site]);
 		#else
@@ -138,12 +151,8 @@ class CoolUtil
 		#end
 	}
 
-	/** Quick Function to Fix Save Files for Flixel 5
-		if you are making a mod, you are gonna wanna change "ShadowMario" to something else
-		so Base Psych saves won't conflict with yours
-		@BeastlyGabi
-	**/
-	public static function getSavePath(folder:String = 'ShadowMario'):String {
+	public static function getSavePath(folder:String = 'Cynda'):String
+	{
 		@:privateAccess
 		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
 			+ '/'

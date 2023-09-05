@@ -55,7 +55,6 @@ class Note extends FlxSprite
 	public static var swagWidth:Float = 160 * 0.7;
 	
 	private var colArray:Array<String> = ['purple', 'blue', 'green', 'red'];
-	private var pixelInt:Array<Int> = [0, 1, 2, 3];
 
 	// Lua shit
 	public var noteSplashDisabled:Bool = false;
@@ -175,20 +174,20 @@ class Note extends FlxSprite
 
 		this.noteData = noteData;
 
-		if(noteData > -1) {
+		if(noteData > -1)
+		{
 			texture = '';
 			colorSwap = new ColorSwap();
 			shader = colorSwap.shader;
 
 			x += swagWidth * (noteData);
-			if(!isSustainNote && noteData > -1 && noteData < 4) { //Doing this 'if' check to fix the warnings on Senpai songs
+			if(!isSustainNote && noteData > -1 && noteData < 4)
+			{
 				var animToPlay:String = '';
 				animToPlay = colArray[noteData % 4];
 				animation.play(animToPlay + 'Scroll');
 			}
 		}
-
-		// trace(prevNote);
 
 		if(prevNote!=null)
 			prevNote.nextNote = this;
@@ -211,9 +210,6 @@ class Note extends FlxSprite
 
 			offsetX -= width / 2;
 
-			if (PlayState.isPixelStage)
-				offsetX += 30;
-
 			if (prevNote.isSustainNote)
 			{
 				prevNote.animation.play(colArray[prevNote.noteData % 4] + 'hold');
@@ -224,19 +220,11 @@ class Note extends FlxSprite
 					prevNote.scale.y *= PlayState.instance.songSpeed;
 				}
 
-				if(PlayState.isPixelStage) {
-					prevNote.scale.y *= 1.19;
-					prevNote.scale.y *= (6 / height); //Auto adjust note size
-				}
 				prevNote.updateHitbox();
-				// prevNote.setGraphicSize();
 			}
-
-			if(PlayState.isPixelStage) {
-				scale.y *= PlayState.daPixelZoom;
-				updateHitbox();
-			}
-		} else if(!isSustainNote) {
+		}
+		else if(!isSustainNote)
+		{
 			earlyHitMult = 1;
 		}
 		x += offsetX;
@@ -245,6 +233,7 @@ class Note extends FlxSprite
 	var lastNoteOffsetXForPixelAutoAdjusting:Float = 0;
 	var lastNoteScaleToo:Float = 1;
 	public var originalHeightForCalcs:Float = 6;
+
 	function reloadNote(?prefix:String = '', ?texture:String = '', ?suffix:String = '') {
 		if(prefix == null) prefix = '';
 		if(texture == null) texture = '';
@@ -268,43 +257,16 @@ class Note extends FlxSprite
 
 		var lastScaleY:Float = scale.y;
 		var blahblah:String = arraySkin.join('/');
-		if(PlayState.isPixelStage) {
-			if(isSustainNote) {
-				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
-				width = width / 4;
-				height = height / 2;
-				originalHeightForCalcs = height;
-				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
-			} else {
-				loadGraphic(Paths.image('pixelUI/' + blahblah));
-				width = width / 4;
-				height = height / 5;
-				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
-			}
-			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
-			loadPixelNoteAnims();
-			antialiasing = false;
 
-			if(isSustainNote) {
-				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
-				lastNoteOffsetXForPixelAutoAdjusting = (width - 7) * (PlayState.daPixelZoom / 2);
-				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
+		frames = Paths.getSparrowAtlas(blahblah);
+		loadNoteAnims();
+		antialiasing = false;
 
-				/*if(animName != null && !animName.endsWith('end'))
-				{
-					lastScaleY /= lastNoteScaleToo;
-					lastNoteScaleToo = (6 / height);
-					lastScaleY *= lastNoteScaleToo;
-				}*/
-			}
-		} else {
-			frames = Paths.getSparrowAtlas(blahblah);
-			loadNoteAnims();
-			antialiasing = false;
-		}
-		if(isSustainNote) {
+		if(isSustainNote)
+		{
 			scale.y = lastScaleY;
 		}
+
 		updateHitbox();
 
 		if(animName != null)
@@ -326,17 +288,16 @@ class Note extends FlxSprite
 			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
 		}
 
-		setGraphicSize(Std.int(width * 0.8));
-		updateHitbox();
-	}
-
-	function loadPixelNoteAnims() {
-		if(isSustainNote) {
-			animation.add(colArray[noteData] + 'holdend', [pixelInt[noteData] + 4]);
-			animation.add(colArray[noteData] + 'hold', [pixelInt[noteData]]);
-		} else {
-			animation.add(colArray[noteData] + 'Scroll', [pixelInt[noteData] + 4]);
+		if(PlayState.SONG.arrowSkin == "yctp_notes")
+		{
+			setGraphicSize(Std.int(width * 0.6));
 		}
+		else
+		{
+			setGraphicSize(Std.int(width * 0.8));
+		}
+
+		updateHitbox();
 	}
 
 	override function update(elapsed:Float)
