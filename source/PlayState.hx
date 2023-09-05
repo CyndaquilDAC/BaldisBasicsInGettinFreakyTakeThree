@@ -292,6 +292,8 @@ class PlayState extends MusicBeatState
 
 	var iconTheThird:HealthIcon;
 
+	var scrollingBgHall:BGSprite;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -534,15 +536,15 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'scrolling-hall-red':
-				var bg:BGSprite = new BGSprite('baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
-				bg.scale.set(0.95, 0.95);
-				bg.updateHitbox();
-				bg.screenCenter();
-				bg.antialiasing = false;
-				bg.x += 95;
-				bg.y += 70;
-				bg.color = FlxColor.RED;
-				add(bg);
+				scrollingBgHall = new BGSprite('baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
+				scrollingBgHall.scale.set(0.95, 0.95);
+				scrollingBgHall.updateHitbox();
+				scrollingBgHall.screenCenter();
+				scrollingBgHall.antialiasing = false;
+				scrollingBgHall.x += 95;
+				scrollingBgHall.y += 70;
+				scrollingBgHall.color = FlxColor.fromRGB(255, 143, 143);
+				add(scrollingBgHall);
 			case 'office':
 				var bg:BGSprite = new BGSprite('office', -600, -200);
 				bg.scale.set(0.95, 0.95);
@@ -2934,8 +2936,6 @@ class PlayState extends MusicBeatState
 		if (gf != null && SONG.notes[curSection].gfSection)
 		{
 			camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
-			camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
-			camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
 			callOnLuas('onMoveCamera', ['gf']);
 			return;
 		}
@@ -3225,6 +3225,8 @@ class PlayState extends MusicBeatState
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
+		comboSpr.scrollFactor.set();
+		rating.scrollFactor.set();
 
 		insert(members.indexOf(strumLineNotes), rating);
 		
@@ -3241,6 +3243,9 @@ class PlayState extends MusicBeatState
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
 
+		comboSpr.setPosition(1073, 430);
+		rating.setPosition(997, 512);
+
 		var seperatedScore:Array<Int> = [];
 
 		if(combo >= 1000)
@@ -3255,10 +3260,8 @@ class PlayState extends MusicBeatState
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
 
-		if (showCombo)
-		{
-			insert(members.indexOf(strumLineNotes), comboSpr);
-		}
+
+		insert(members.indexOf(strumLineNotes), comboSpr);
 
 		if (!ClientPrefs.comboStacking)
 		{
@@ -3301,6 +3304,9 @@ class PlayState extends MusicBeatState
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
 			numScore.visible = !ClientPrefs.hideHud;
 
+			numScore.setPosition(1038 + (48 * daLoop), 660);
+			numScore.scrollFactor.set();
+
 			if(showComboNum)
 				insert(members.indexOf(strumLineNotes), numScore);
 
@@ -3317,7 +3323,7 @@ class PlayState extends MusicBeatState
 			if(numScore.x > xThing) xThing = numScore.x;
 		}
 
-		comboSpr.x = xThing + 50;
+		//comboSpr.x = xThing + 50;
 
 		coolText.text = Std.string(seperatedScore);
 
@@ -3332,7 +3338,6 @@ class PlayState extends MusicBeatState
 			{
 				coolText.destroy();
 				comboSpr.destroy();
-
 				rating.destroy();
 			},
 			startDelay: Conductor.crochet * 0.002 / playbackRate
@@ -3957,11 +3962,14 @@ class PlayState extends MusicBeatState
 				{
 					case 704:
 						defaultCamZoom += 0.15;
+						FlxTween.color(scrollingBgHall, (Conductor.crochet / 1000) * 8, scrollingBgHall.color, FlxColor.RED);
 					case 708:
 						defaultCamZoom += 0.2;
 					case 712:
 						defaultCamZoom -= 0.35;
+						FlxG.camera.flash();
 					case 1032:
+						FlxG.camera.flash(FlxColor.WHITE, 4);
 						FlxTween.tween(whiteScreenThing, {alpha: 1}, 42);
 				}
 			case 'dsci':
