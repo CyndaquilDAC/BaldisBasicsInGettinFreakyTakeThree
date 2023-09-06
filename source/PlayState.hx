@@ -294,6 +294,8 @@ class PlayState extends MusicBeatState
 
 	var scrollingBgHall:BGSprite;
 
+	var camZoomBeatHit:Bool = false;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -417,6 +419,8 @@ class PlayState extends MusicBeatState
 					curStage = '0th-prize';
 				case 'supplies':
 					curStage = 'closet';
+				case 'good-marks':
+					curStage = 'trademarkia';
 				default:
 					curStage = 'stage';
 			}
@@ -610,6 +614,10 @@ class PlayState extends MusicBeatState
 				bg.antialiasing = false;
 				add(bg);
 				songIsMiddleScrolled = true;
+			case 'trademarkia':
+				var bg:BGSprite = new BGSprite('goodMarks', -164, -117);
+				bg.antialiasing = true;
+				add(bg);
 			case 'dsci':
 				var bg:BGSprite = new BGSprite('dscii/bg', -600, -200);
 				bg.scale.set(0.95, 0.95);
@@ -3924,6 +3932,15 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 		iconTheThird.updateHitbox();
 
+		if(camZoomBeatHit)
+		{
+			if (ClientPrefs.camZooms && !yctpTime)
+			{
+				FlxG.camera.zoom += 0.015 * camZoomingMult;
+				camHUD.zoom += 0.03 * camZoomingMult;
+			}
+		}
+
 		if (gf != null && curBeat % Math.round(gfSpeed * gf.danceEveryNumBeats) == 0 && gf.animation.curAnim != null && !gf.animation.curAnim.name.startsWith("sing") && !gf.stunned)
 		{
 			gf.dance();
@@ -3980,6 +3997,32 @@ class PlayState extends MusicBeatState
 					case 132:
 						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backIn});
 				}
+			case 'good-marks':
+				switch(curBeat)
+				{
+					case 63:
+						defaultCamZoom -= 0.1;
+					case 64:
+						defaultCamZoom += 0.2;
+					case 128:
+						defaultCamZoom -= 0.1;
+						camZoomingMult = 4;
+						camZoomBeatHit = true;
+					case 160:
+						defaultCamZoom += 0.15;
+					case 192:
+						defaultCamZoom -= 0.15;
+						camZoomingMult = 0;
+						camZoomBeatHit = false;
+					case 194:
+						camZoomingMult = 1;
+					case 256:
+						defaultCamZoom += 0.1;
+					case 288 | 290 | 292 | 294 | 295:
+						defaultCamZoom += 0.05;
+					case 296:
+						defaultCamZoom -= (0.05 * 5) + 0.1;
+				}
 		}
 
 		lastBeatHit = curBeat;
@@ -4001,10 +4044,13 @@ class PlayState extends MusicBeatState
 				moveCameraSection();
 			}
 
-			if (FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && !yctpTime)
+			if(!camZoomBeatHit)
 			{
-				FlxG.camera.zoom += 0.015 * camZoomingMult;
-				camHUD.zoom += 0.03 * camZoomingMult;
+				if (ClientPrefs.camZooms && !yctpTime)
+				{
+					FlxG.camera.zoom += 0.015 * camZoomingMult;
+					camHUD.zoom += 0.03 * camZoomingMult;
+				}
 			}
 
 			if (SONG.notes[curSection].changeBPM)
