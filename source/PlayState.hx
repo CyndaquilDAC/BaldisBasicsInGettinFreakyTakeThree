@@ -131,6 +131,8 @@ class PlayState extends MusicBeatState
 	public var GF_X:Float = 400;
 	public var GF_Y:Float = 130;
 
+	public var rollinSpeaker:FlxSprite;
+
 	public var songSpeedTween:FlxTween;
 	public var songSpeed(default, set):Float = 1;
 	public var songSpeedType:String = "multiplicative";
@@ -549,6 +551,12 @@ class PlayState extends MusicBeatState
 				scrollingBgHall.y += 70;
 				scrollingBgHall.color = FlxColor.fromRGB(255, 143, 143);
 				add(scrollingBgHall);
+
+				rollinSpeaker = new FlxSprite().loadGraphic(Paths.image("boombox on wheels"));
+				rollinSpeaker.scale.set(0.875, 0.875);
+				rollinSpeaker.updateHitbox();
+				rollinSpeaker.antialiasing = false;
+				add(rollinSpeaker);
 			case 'office':
 				var bg:BGSprite = new BGSprite('office', -600, -200);
 				bg.scale.set(0.95, 0.95);
@@ -616,7 +624,7 @@ class PlayState extends MusicBeatState
 				songIsMiddleScrolled = true;
 			case 'trademarkia':
 				var bg:BGSprite = new BGSprite('goodMarks', -164, -117);
-				bg.antialiasing = true;
+				bg.antialiasing = false;
 				add(bg);
 			case 'dsci':
 				var bg:BGSprite = new BGSprite('dscii/bg', -600, -200);
@@ -726,14 +734,10 @@ class PlayState extends MusicBeatState
 			SONG.gfVersion = gfVersion;
 		}
 
-		if (!stageData.hide_girlfriend)
-		{
-			gf = new Character(0, 0, gfVersion);
-			startCharacterPos(gf);
-			gf.scrollFactor.set(0.95, 0.95);
-			gfGroup.add(gf);
-			startCharacterLua(gf.curCharacter);
-		}
+		gf = new Character(0, 0, gfVersion);
+		startCharacterPos(gf);
+		gfGroup.add(gf);
+		startCharacterLua(gf.curCharacter);
 
 		dad = new Character(0, 0, SONG.player2);
 		startCharacterPos(dad, true);
@@ -762,6 +766,16 @@ class PlayState extends MusicBeatState
 		{
 			dadGroup.visible = false;
 			boyfriendGroup.visible = false;
+		}
+
+		if (stageData.hide_girlfriend)
+		{
+			gfGroup.visible = false;
+		}
+
+		if(rollinSpeaker != null)
+		{
+			rollinSpeaker.setPosition(gf.x + gfGroup.x, gf.y + gfGroup.y);
 		}
 
 		if(curStage.toLowerCase() == '0th-prize' || curStage.toLowerCase() == 'closet')
