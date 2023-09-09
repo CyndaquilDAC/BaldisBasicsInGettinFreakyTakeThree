@@ -553,7 +553,7 @@ class PlayState extends MusicBeatState
 				add(scrollingBgHall);
 
 				rollinSpeaker = new FlxSprite().loadGraphic(Paths.image("boombox on wheels"));
-				rollinSpeaker.scale.set(0.875, 0.875);
+				rollinSpeaker.scale.set(0.7, 0.7);
 				rollinSpeaker.updateHitbox();
 				rollinSpeaker.antialiasing = false;
 				add(rollinSpeaker);
@@ -987,6 +987,10 @@ class PlayState extends MusicBeatState
 		{
 			switch (daSong)
 			{
+				case 'critical-thinking':
+					startVideo("critical-thinking");
+				case '99':
+					startVideo("99");
 				default:
 					startCountdown();
 			}
@@ -3983,16 +3987,78 @@ class PlayState extends MusicBeatState
 			case '99':
 				switch(curBeat)
 				{
+					case 126 | 446:
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom + 0.25}, Conductor.crochet / 500, {ease: FlxEase.circIn});
+						defaultCamZoom += 0.25;
+					case 128 | 448:
+						FlxTween.cancelTweensOf(FlxG.camera);
+						FlxG.camera.flash();
+						defaultCamZoom -= 0.3;
+					case 140 | 141 | 142 | 143 | 172 | 173 | 174 | 175:
+						defaultCamZoom += 0.05;
+					case 144 | 176:
+						defaultCamZoom -= 0.2;
+					case 152 | 154 | 156 | 158 | 159 | 184 | 186:
+						FlxG.camera.zoom += 0.1;
+					case 188 | 190 | 191:
+						FlxG.camera.zoom -= 0.1;
+					case 192:
+						camZoomBeatHit = true;
+					case 220:
+						defaultCamZoom += 0.15;
+					case 224:
+						defaultCamZoom -= 0.15;
+					case 255:
+						defaultCamZoom += 0.2;
+					case 256:
+						defaultCamZoom -= 0.1;
+						FlxG.camera.flash();
+						camZoomBeatHit = false;
+					case 312 | 315 | 318 | 376 | 379 | 382:
+						defaultCamZoom += 0.05;
+					case 320:
+						defaultCamZoom -= 0.15;
+					case 384:
+						FlxG.camera.flash();
+						defaultCamZoom -= 0.15;
+					case 512:
+						FlxG.camera.flash();
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom - 0.15}, Conductor.crochet / 250, {ease: FlxEase.circOut});
+						defaultCamZoom -= 0.15;
+					case 516:
+						FlxTween.cancelTweensOf(FlxG.camera);
+					case 544:
+						defaultCamZoom += 0.05;
+					case 568:
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom + 0.5}, (Conductor.crochet / 250) * 2, {ease: FlxEase.circIn});
+						defaultCamZoom += 0.5;
+					case 576:
+						FlxTween.cancelTweensOf(FlxG.camera);
+						FlxG.camera.flash();
+						defaultCamZoom -= 0.4;
+						camZoomBeatHit = true;
+					case 640 | 672 | 808:
+						defaultCamZoom -= 0.1;
+					case 664 | 668 | 696 | 700 | 800 | 804 | 832 | 836:
+						defaultCamZoom += 0.05;
 					case 704:
+						camZoomBeatHit = false;
 						defaultCamZoom += 0.15;
 						FlxTween.color(scrollingBgHall, (Conductor.crochet / 1000) * 8, scrollingBgHall.color, FlxColor.RED);
 					case 708:
 						defaultCamZoom += 0.2;
 					case 712:
+						camZoomBeatHit = true;
 						defaultCamZoom -= 0.35;
+						FlxG.camera.flash();
+					case 840:
+						camZoomBeatHit = false;
+						defaultCamZoom -= 0.1;
 						FlxG.camera.flash();
 					case 1032:
 						FlxG.camera.flash(FlxColor.WHITE, 4);
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom - 0.15}, 15);
+						defaultCamZoom -= 0.15;
 						FlxTween.tween(whiteScreenThing, {alpha: 1}, 42);
 				}
 			case 'dsci':
