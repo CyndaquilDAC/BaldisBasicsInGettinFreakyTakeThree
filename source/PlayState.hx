@@ -555,6 +555,7 @@ class PlayState extends MusicBeatState
 				rollinSpeaker = new FlxSprite().loadGraphic(Paths.image("boombox on wheels"));
 				rollinSpeaker.scale.set(0.7, 0.7);
 				rollinSpeaker.updateHitbox();
+				rollinSpeaker.setPosition(400 - 265, 235 + 135);
 				rollinSpeaker.antialiasing = false;
 				add(rollinSpeaker);
 			case 'office':
@@ -773,11 +774,6 @@ class PlayState extends MusicBeatState
 			gfGroup.visible = false;
 		}
 
-		if(rollinSpeaker != null)
-		{
-			rollinSpeaker.setPosition(gf.x + gfGroup.x, gf.y + gfGroup.y);
-		}
-
 		if(curStage.toLowerCase() == '0th-prize' || curStage.toLowerCase() == 'closet')
 		{
 			boyfriendGroup.visible = false;
@@ -987,6 +983,8 @@ class PlayState extends MusicBeatState
 		{
 			switch (daSong)
 			{
+				case 'basically-sing':
+					startVideo("basically-sing");
 				case 'critical-thinking':
 					startVideo("critical-thinking");
 				case '99':
@@ -2154,6 +2152,9 @@ class PlayState extends MusicBeatState
 	{
 		if(finishTimer != null) return;
 
+		FlxG.sound.music.looped = false;
+		vocals.looped = false;
+
 		vocals.pause();
 
 		FlxG.sound.music.play();
@@ -2161,9 +2162,10 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = FlxG.sound.music.time;
 		if (Conductor.songPosition <= vocals.length)
 		{
-			vocals.time = Conductor.songPosition;
+			vocals.time = Conductor.songPosition - 0.000001;
 			vocals.pitch = playbackRate;
 		}
+
 		vocals.play();
 	}
 
@@ -2173,9 +2175,13 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
+	var stupidLapsed:Float = 0;
+
 	override public function update(elapsed:Float)
 	{
 		callOnLuas('onUpdate', [elapsed]);
+
+		stupidLapsed += elapsed;
 
 		if(!inCutscene)
 		{
@@ -2221,6 +2227,17 @@ class PlayState extends MusicBeatState
 					dsciRight.visible = false;
 				}
 			}
+		}
+
+		if(rollinSpeaker != null)
+		{
+			var fuckFuckerShitFuckCrap:Float = ((Math.sin(stupidLapsed * 4)));
+			//var fuckFuckerShitFuckCrapTheSecond:Float = ((Math.cos(stupidLapsed * 4)));
+			boyfriend.y += fuckFuckerShitFuckCrap;
+			//boyfriend.x += fuckFuckerShitFuckCrapTheSecond;
+			gf.y += fuckFuckerShitFuckCrap;
+			//gf.x += fuckFuckerShitFuckCrapTheSecond;
+			moveCameraSection();
 		}
 
 		super.update(elapsed);
@@ -2943,7 +2960,8 @@ class PlayState extends MusicBeatState
 		{
 			duetCamAdd = -0.05;
 
-			camFollow.set(boyfriend.getMidpoint().x - 385, dad.getMidpoint().y - 75);
+			camFollow.set(boyfriend.getMidpoint().x - 385, dad.getMidpoint().y - 90);
+			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
 			//camFollow.set((dad.getMidpoint().x) + (boyfriend.getMidpoint().x) / 2, (dad.getMidpoint().y - 100));
 
 			return;
@@ -4001,7 +4019,7 @@ class PlayState extends MusicBeatState
 					case 152 | 154 | 156 | 158 | 159 | 184 | 186:
 						FlxG.camera.zoom += 0.1;
 					case 188 | 190 | 191:
-						FlxG.camera.zoom -= 0.1;
+						FlxG.camera.zoom += 0.2;
 					case 192:
 						camZoomBeatHit = true;
 					case 220:

@@ -59,8 +59,8 @@
 	"no_antialiasing": true,
 	"image": "characters/baldi_mad",
 	"position": [
-		-160,
-		-140
+		-180,
+		-210
 	],
 	"healthicon": "baldi",
 	"flip_x": false,
@@ -70,9 +70,9 @@
 		49
 	],
 	"camera_position": [
-		-70,
-		-200
+		-160,
+		-270
 	],
 	"sing_duration": 6,
-	"scale": 1.5
+	"scale": 1.7
 }
