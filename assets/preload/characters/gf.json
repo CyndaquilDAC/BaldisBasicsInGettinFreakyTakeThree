@@ -57,7 +57,7 @@
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/GF_assets",
+	"image": "characters/shared/GF_assets",
 	"position": [
 		-330,
 		10

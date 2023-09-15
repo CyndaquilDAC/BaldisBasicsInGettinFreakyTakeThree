@@ -4340,7 +4340,7 @@
 		"stage": "yctp",
 		"needsVoices": true,
 		"validScore": true,
-		"arrowSkin": "yctp_notes",
+		"arrowSkin": "ui/yctp_notes",
 		"bpm": 121,
 		"speed": 3.25
 	}

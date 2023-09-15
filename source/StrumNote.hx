@@ -36,7 +36,7 @@ class StrumNote extends FlxSprite
 		this.noteData = leData;
 		super(x, y);
 
-		var skin:String = 'NOTE_assets';
+		var skin:String = 'ui/notes';
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		texture = skin;
 
@@ -56,7 +56,7 @@ class StrumNote extends FlxSprite
 
 		antialiasing = false;
 
-		if(texture == "yctp_notes")
+		if(texture == "ui/yctp_notes")
 		{
 			setGraphicSize(Std.int(width * 0.6));
 		}
@@ -96,7 +96,7 @@ class StrumNote extends FlxSprite
 	public function postAddedToGroup() {
 		playAnim('static');
 
-		if(texture == "yctp_notes")
+		if(texture == "ui/yctp_notes")
 		{
 			x += this.width * noteData;
 		}
@@ -106,7 +106,7 @@ class StrumNote extends FlxSprite
 		}
 		x += 50;
 		x += ((FlxG.width / 2) * player);
-		if(texture == "yctp_notes")
+		if(texture == "ui/yctp_notes")
 		{
 			x += 35;
 			x += 160;

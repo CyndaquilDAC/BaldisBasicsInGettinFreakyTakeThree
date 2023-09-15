@@ -195,7 +195,7 @@ class PlayState extends MusicBeatState
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
-	public var shits:Int = 0;
+	public var goshes:Int = 0;
 
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
@@ -221,10 +221,6 @@ class PlayState extends MusicBeatState
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
-
-	var dadbattleBlack:BGSprite;
-	var dadbattleLight:BGSprite;
-	var dadbattleSmokes:FlxSpriteGroup;
 
 	var heyTimer:Float;
 
@@ -285,11 +281,6 @@ class PlayState extends MusicBeatState
 	//intended y is 460
 	public var jackhammerWarning:FlxSprite;
 
-	var dsciLeft:BGSprite;
-	var dsciDown:BGSprite;
-	var dsciUp:BGSprite;
-	var dsciRight:BGSprite;
-
 	var songIsMiddleScrolled:Bool = false;
 
 	var iconTheThird:HealthIcon;
@@ -336,7 +327,7 @@ class PlayState extends MusicBeatState
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
-		var rating:Rating = new Rating('shit');
+		var rating:Rating = new Rating('gosh');
 		rating.ratingMod = 0;
 		rating.score = 50;
 		rating.noteSplash = false;
@@ -494,26 +485,25 @@ class PlayState extends MusicBeatState
 			case 'stage':
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
-				var stageFront:BGSprite = new BGSprite('stagefront', -650, 600, 0.9, 0.9);
+				var stageFront:BGSprite = new BGSprite('bgs/placeholder/stagefront', -650, 600, 0.9, 0.9);
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 				stageFront.updateHitbox();
 				add(stageFront);
-				var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
+				var stageLight:BGSprite = new BGSprite('bgs/placeholder/stage_light', -125, -100, 0.9, 0.9);
 				stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
 				stageLight.updateHitbox();
 				add(stageLight);
-				var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
+				var stageLight:BGSprite = new BGSprite('bgs/placeholder/stage_light', 1225, -100, 0.9, 0.9);
 				stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
 				stageLight.updateHitbox();
 				stageLight.flipX = true;
 				add(stageLight);
-				var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
+				var stageCurtains:BGSprite = new BGSprite('bgs/placeholder/stagecurtains', -500, -300, 1.3, 1.3);
 				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 				stageCurtains.updateHitbox();
 				add(stageCurtains);
-				dadbattleSmokes = new FlxSpriteGroup();
 			case 'starting-area':
-				var bg:BGSprite = new BGSprite('startingArea', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/startingArea', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -522,18 +512,18 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'yctp':
-				var bg:BGSprite = new BGSprite('yctp_colorback', 0, 0);
+				var bg:BGSprite = new BGSprite('bgs/yctp/yctp_colorback', 0, 0);
 				bg.scrollFactor.set();
 				bg.antialiasing = false;
 				add(bg);
 
-				yctpOverlay = new BGSprite('yctp', 0, 0);
+				yctpOverlay = new BGSprite('bgs/yctp/yctp', 0, 0);
 				yctpOverlay.scrollFactor.set();
 				yctpOverlay.antialiasing = false;
 
 				yctpTime = true;
 			case 'scrolling-hall':
-				var bg:BGSprite = new BGSprite('baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
+				var bg:BGSprite = new BGSprite('bgs/scroll/baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -542,7 +532,7 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'scrolling-hall-red':
-				scrollingBgHall = new BGSprite('baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
+				scrollingBgHall = new BGSprite('bgs/scroll/baldi_hall_scroll', -600, -200, 1, 1, ["idle"], true);
 				scrollingBgHall.scale.set(0.95, 0.95);
 				scrollingBgHall.updateHitbox();
 				scrollingBgHall.screenCenter();
@@ -552,14 +542,14 @@ class PlayState extends MusicBeatState
 				scrollingBgHall.color = FlxColor.fromRGB(255, 143, 143);
 				add(scrollingBgHall);
 
-				rollinSpeaker = new FlxSprite().loadGraphic(Paths.image("boombox on wheels"));
+				rollinSpeaker = new FlxSprite().loadGraphic(Paths.image("bgs/scroll/boombox on wheels"));
 				rollinSpeaker.scale.set(0.7, 0.7);
 				rollinSpeaker.updateHitbox();
 				rollinSpeaker.setPosition(400 - 265, 235 + 135);
 				rollinSpeaker.antialiasing = false;
 				add(rollinSpeaker);
 			case 'office':
-				var bg:BGSprite = new BGSprite('office', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/office', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -568,7 +558,7 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'playtime':
-				var bg:BGSprite = new BGSprite('playtime', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/playtime', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -577,7 +567,7 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'crafters':
-				var bg:BGSprite = new BGSprite('crafters', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/crafters', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -586,13 +576,13 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'closet':
-				var bg:BGSprite = new BGSprite('closet', -591, -399);
+				var bg:BGSprite = new BGSprite('bgs/closet', -591, -399);
 				bg.scale.set(0.95, 0.95);
 				bg.antialiasing = false;
 				add(bg);
 				songIsMiddleScrolled = true;
 			case 'bully':
-				var bg:BGSprite = new BGSprite('bully', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/bully', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -601,7 +591,7 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'firstPrize1':
-				var bg:BGSprite = new BGSprite('firstPrize1', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/firstPrize1', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -610,7 +600,7 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case 'firstPrize2':
-				var bg:BGSprite = new BGSprite('firstPrize2', -600, -200);
+				var bg:BGSprite = new BGSprite('bgs/firstPrize2', -600, -200);
 				bg.scale.set(0.95, 0.95);
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -619,58 +609,22 @@ class PlayState extends MusicBeatState
 				bg.y += 70;
 				add(bg);
 			case '0th-prize':
-				var bg:BGSprite = new BGSprite('0th prize', -621, -357);
+				var bg:BGSprite = new BGSprite('bgs/extras/forgotten', -621, -357);
 				bg.antialiasing = false;
 				add(bg);
 				songIsMiddleScrolled = true;
 			case 'trademarkia':
-				var bg:BGSprite = new BGSprite('goodMarks', -164, -117);
+				var bg:BGSprite = new BGSprite('bgs/extras/goodMarks', -164, -117);
 				bg.antialiasing = false;
 				add(bg);
 			case 'dsci':
-				var bg:BGSprite = new BGSprite('dscii/bg', -600, -200);
-				bg.scale.set(0.95, 0.95);
-				bg.updateHitbox();
-				bg.screenCenter();
-				bg.scrollFactor.set();
+				var bg:BGSprite = new BGSprite('dsci/bg', 0, 0);
+				/*bg.scale.set(0.95, 0.95);
+				bg.updateHitbox();*/
+				//bg.screenCenter();
+				//bg.scrollFactor.set();
 				bg.antialiasing = false;
 				add(bg);
-
-				dsciLeft = new BGSprite('dscii/left', -600, -200);
-				dsciLeft.scale.set(0.95, 0.95);
-				dsciLeft.updateHitbox();
-				dsciLeft.screenCenter();
-				dsciLeft.scrollFactor.set();
-				dsciLeft.antialiasing = false;
-				add(dsciLeft);
-				dsciLeft.visible = false;
-
-				dsciRight = new BGSprite('dscii/right', -600, -200);
-				dsciRight.scale.set(0.95, 0.95);
-				dsciRight.updateHitbox();
-				dsciRight.screenCenter();
-				dsciRight.scrollFactor.set();
-				dsciRight.antialiasing = false;
-				add(dsciRight);
-				dsciRight.visible = false;
-
-				dsciUp = new BGSprite('dscii/up', -600, -200);
-				dsciUp.scale.set(0.95, 0.95);
-				dsciUp.updateHitbox();
-				dsciUp.screenCenter();
-				dsciUp.scrollFactor.set();
-				dsciUp.antialiasing = false;
-				add(dsciUp);
-				dsciUp.visible = false;
-
-				dsciDown = new BGSprite('dscii/down', -600, -200);
-				dsciDown.scale.set(0.95, 0.95);
-				dsciDown.updateHitbox();
-				dsciDown.screenCenter();
-				dsciDown.scrollFactor.set();
-				dsciDown.antialiasing = false;
-				add(dsciDown);
-				dsciDown.visible = false;
 
 				songIsMiddleScrolled = true;
 		}
@@ -843,7 +797,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite('healthBar');
+		healthBarBG = new AttachedSprite('ui/healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -909,7 +863,7 @@ class PlayState extends MusicBeatState
 
 		add(timeTxt);
 
-		jackhammerWarning = new FlxSprite(5, 750).loadGraphic(Paths.image("jackhammer"));
+		jackhammerWarning = new FlxSprite(5, 750).loadGraphic(Paths.image("ui/jackhammer"));
 		jackhammerWarning.antialiasing = false;
 		add(jackhammerWarning);
 
@@ -1404,7 +1358,7 @@ class PlayState extends MusicBeatState
 				}
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-				introAssets.set('default', ['ready', 'set', 'go']);
+				introAssets.set('default', ['ui/ready', 'ui/set', 'ui/go']);
 
 				var introAlts:Array<String> = introAssets.get('default');
 				var antialias:Bool = false;
@@ -1910,39 +1864,6 @@ class PlayState extends MusicBeatState
 
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
-
-			case 'Dadbattle Spotlight':
-				dadbattleBlack = new BGSprite(null, -800, -400, 0, 0);
-				dadbattleBlack.makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-				dadbattleBlack.alpha = 0.25;
-				dadbattleBlack.visible = false;
-				add(dadbattleBlack);
-
-				dadbattleLight = new BGSprite('spotlight', 400, -400);
-				dadbattleLight.alpha = 0.375;
-				dadbattleLight.blend = ADD;
-				dadbattleLight.visible = false;
-
-				dadbattleSmokes.alpha = 0.7;
-				dadbattleSmokes.blend = ADD;
-				dadbattleSmokes.visible = false;
-				add(dadbattleLight);
-				add(dadbattleSmokes);
-
-				var offsetX = 200;
-				var smoke:BGSprite = new BGSprite('smoke', -1550 + offsetX, 660 + FlxG.random.float(-20, 20), 1.2, 1.05);
-				smoke.setGraphicSize(Std.int(smoke.width * FlxG.random.float(1.1, 1.22)));
-				smoke.updateHitbox();
-				smoke.velocity.x = FlxG.random.float(15, 22);
-				smoke.active = true;
-				dadbattleSmokes.add(smoke);
-				var smoke:BGSprite = new BGSprite('smoke', 1550 + offsetX, 660 + FlxG.random.float(-20, 20), 1.2, 1.05);
-				smoke.setGraphicSize(Std.int(smoke.width * FlxG.random.float(1.1, 1.22)));
-				smoke.updateHitbox();
-				smoke.velocity.x = FlxG.random.float(-15, -22);
-				smoke.active = true;
-				smoke.flipX = true;
-				dadbattleSmokes.add(smoke);
 		}
 
 		if(!eventPushedMap.exists(event.event))
@@ -2200,32 +2121,6 @@ class PlayState extends MusicBeatState
 			else
 			{
 				boyfriendIdleTime = 0;
-			}
-		}
-
-		if(dsciDown != null)
-		{
-			if(opponentStrums.members[3] != null)
-			{
-				if(opponentStrums.members[0].animation.curAnim.name != "confirm")
-				{
-					dsciLeft.visible = false;
-				}
-
-				if(opponentStrums.members[1].animation.curAnim.name != "confirm")
-				{
-					dsciDown.visible = false;
-				}
-
-				if(opponentStrums.members[2].animation.curAnim.name != "confirm")
-				{
-					dsciUp.visible = false;
-				}
-
-				if(opponentStrums.members[3].animation.curAnim.name != "confirm")
-				{
-					dsciRight.visible = false;
-				}
 			}
 		}
 
@@ -2660,39 +2555,6 @@ class PlayState extends MusicBeatState
 	{
 		switch(eventName)
 		{
-			case 'Dadbattle Spotlight':
-				var val:Null<Int> = Std.parseInt(value1);
-				if(val == null) val = 0;
-
-				switch(Std.parseInt(value1))
-				{
-					case 1, 2, 3:
-						if(val == 1)
-						{
-							dadbattleBlack.visible = true;
-							dadbattleLight.visible = true;
-							dadbattleSmokes.visible = true;
-							defaultCamZoom += 0.12;
-						}
-
-						var who:Character = dad;
-						if(val > 2) who = boyfriend;
-						dadbattleLight.alpha = 0;
-						new FlxTimer().start(0.12, function(tmr:FlxTimer)
-						{
-							dadbattleLight.alpha = 0.375;
-						});
-						dadbattleLight.setPosition(who.getGraphicMidpoint().x - dadbattleLight.width / 2, who.y + who.height - dadbattleLight.height + 50);
-
-					default:
-						dadbattleBlack.visible = false;
-						dadbattleLight.visible = false;
-						defaultCamZoom -= 0.12;
-						FlxTween.tween(dadbattleSmokes, {alpha: 0}, 1, {onComplete: function(twn:FlxTween)
-						{
-							dadbattleSmokes.visible = false;
-						}});
-				}
 			case 'Hey!':
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim())
@@ -2962,7 +2824,6 @@ class PlayState extends MusicBeatState
 
 			camFollow.set(boyfriend.getMidpoint().x - 385, dad.getMidpoint().y - 90);
 			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
-			//camFollow.set((dad.getMidpoint().x) + (boyfriend.getMidpoint().x) / 2, (dad.getMidpoint().y - 100));
 
 			return;
 		}
@@ -3181,13 +3042,13 @@ class PlayState extends MusicBeatState
 
 	private function cachePopUpScore()
 	{
-		var prefix:String = '';
+		var prefix:String = 'ui/';
 		var suffix:String = '';
 
 		Paths.image(prefix + "sick" + suffix);
 		Paths.image(prefix + "good" + suffix);
 		Paths.image(prefix + "bad" + suffix);
-		Paths.image(prefix + "shit" + suffix);
+		Paths.image(prefix + "gosh" + suffix);
 		Paths.image(prefix + "combo" + suffix);
 		
 		for (i in 0...10)
@@ -3235,7 +3096,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		var prefix:String = "";
+		var prefix:String = "ui/";
 		var suffix:String = '';
 
 		rating.loadGraphic(Paths.image(prefix + daRating.image + suffix));
@@ -3702,21 +3563,6 @@ class PlayState extends MusicBeatState
 		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)), time);
 		note.hitByOpponent = true;
 
-		if(dsciDown != null)
-		{
-			switch(singAnimations[Std.int(Math.abs(note.noteData))].toLowerCase())
-			{
-				case 'singleft':
-					dsciLeft.visible = true;
-				case 'singdown':
-					dsciDown.visible = true;
-				case 'singup':
-					dsciUp.visible = true;
-				case 'singright':
-					dsciRight.visible = true;
-			}
-		}
-
 		callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
 
 		if (!note.isSustainNote)
@@ -4082,9 +3928,9 @@ class PlayState extends MusicBeatState
 			case 'dsci':
 				switch(curBeat)
 				{
-					case 191:
+					case 207:
 						FlxTween.tween(jackhammerWarning, {y: 460}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backOut});
-					case 254:
+					case 270:
 						FlxTween.tween(jackhammerWarning, {y: 750}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.backIn});
 				}
 			case 'this-is-a-song':
@@ -4294,7 +4140,7 @@ class PlayState extends MusicBeatState
 			ratingFC = "";
 			if (sicks > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
+			if (bads > 0 || goshes > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 			else if (songMisses >= 10) ratingFC = "Clear";
 		}

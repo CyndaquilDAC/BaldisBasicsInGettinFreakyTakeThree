@@ -23,14 +23,8 @@ class Section
 	public var mustHitSection:Bool = true;
 	public var coolDuetCam:Bool = false;
 
-	/**
-	 *	Copies the first section into the second section!
-	 */
-	public static var COPYCAT:Int = 0;
-
 	public function new(sectionBeats:Float = 4)
 	{
 		this.sectionBeats = sectionBeats;
-		trace('test created section: ' + sectionBeats);
 	}
 }

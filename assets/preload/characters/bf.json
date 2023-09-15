@@ -112,7 +112,7 @@
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/BOYFRIEND",
+	"image": "characters/shared/BOYFRIEND",
 	"position": [
 		-120,
 		150

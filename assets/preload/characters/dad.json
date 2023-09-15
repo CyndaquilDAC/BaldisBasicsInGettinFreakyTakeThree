@@ -121,7 +121,7 @@
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/DADDY_DEAREST",
+	"image": "characters/shared/DADDY_DEAREST",
 	"position": [
 		0,
 		0

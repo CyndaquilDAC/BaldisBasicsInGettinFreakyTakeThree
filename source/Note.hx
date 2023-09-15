@@ -89,10 +89,10 @@ class Note extends FlxSprite
 
 	public var hitsoundDisabled:Bool = false;
 
-	private function set_multSpeed(value:Float):Float {
+	private function set_multSpeed(value:Float):Float
+	{
 		resizeByRatio(value / multSpeed);
 		multSpeed = value;
-		//trace('fuck cock');
 		return value;
 	}
 
@@ -105,15 +105,18 @@ class Note extends FlxSprite
 		}
 	}
 
-	private function set_texture(value:String):String {
-		if(texture != value) {
+	private function set_texture(value:String):String
+	{
+		if(texture != value)
+		{
 			reloadNote('', value);
 		}
 		texture = value;
 		return value;
 	}
 
-	private function set_noteType(value:String):String {
+	private function set_noteType(value:String):String
+	{
 		noteSplashTexture = PlayState.SONG.splashSkin;
 		if (noteData > -1 && noteData < ClientPrefs.arrowHSV.length)
 		{
@@ -122,23 +125,10 @@ class Note extends FlxSprite
 			colorSwap.brightness = ClientPrefs.arrowHSV[noteData][2] / 100;
 		}
 
-		if(noteData > -1 && noteType != value) {
-			switch(value) {
-				case 'Hurt Note':
-					ignoreNote = mustPress;
-					reloadNote('HURT');
-					noteSplashTexture = 'HURTnoteSplashes';
-					colorSwap.hue = 0;
-					colorSwap.saturation = 0;
-					colorSwap.brightness = 0;
-					lowPriority = true;
-
-					if(isSustainNote) {
-						missHealth = 0.1;
-					} else {
-						missHealth = 0.3;
-					}
-					hitCausesMiss = true;
+		if(noteData > -1 && noteType != value)
+		{
+			switch(value)
+			{
 				case 'Alt Animation':
 					animSuffix = '-alt';
 				case 'No Animation':
@@ -243,7 +233,7 @@ class Note extends FlxSprite
 		if(texture.length < 1) {
 			skin = PlayState.SONG.arrowSkin;
 			if(skin == null || skin.length < 1) {
-				skin = 'NOTE_assets';
+				skin = 'ui/notes';
 			}
 		}
 
@@ -278,7 +268,8 @@ class Note extends FlxSprite
 		}
 	}
 
-	function loadNoteAnims() {
+	function loadNoteAnims()
+	{
 		animation.addByPrefix(colArray[noteData] + 'Scroll', colArray[noteData] + '0');
 
 		if (isSustainNote)
@@ -288,7 +279,7 @@ class Note extends FlxSprite
 			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
 		}
 
-		if(PlayState.SONG.arrowSkin == "yctp_notes")
+		if(PlayState.SONG.arrowSkin == "ui/yctp_notes")
 		{
 			setGraphicSize(Std.int(width * 0.6));
 		}

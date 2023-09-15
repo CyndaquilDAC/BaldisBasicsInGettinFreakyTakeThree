@@ -396,7 +396,7 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					createCoolText(["Baldi's Basics in Gettin' Freaky by"]);
+					createCoolText(["An FNF mod by"]);
 				case 4:
 					addMoreText('Cynda', 15);
 					addMoreText('Regular Dumbass', 15);
@@ -407,7 +407,7 @@ class TitleState extends MusicBeatState
 				case 6:
 					createCoolText(['NOT ACTUALLY ASSOCIATED', 'WITH'], -40);
 				case 8:
-					addMoreText('BASICALLY, GAMES!', -40);
+					addMoreText('BASICALLY GAMES', -40);
 					ngSpr.visible = true;
 				case 9:
 					deleteCoolText();
