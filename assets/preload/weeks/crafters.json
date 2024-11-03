@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Timid", "aac", [188, 189, 186]],
-		["Encircling", "aac", [188, 189, 186]],
-		["Screech", "aac", [188, 189, 186]]
-	],
+  "songs": [
+    ["Timid", "aac", [188, 189, 186]],
+    ["Encircling", "aac", [188, 189, 186]],
+    ["Screech", "aac", [188, 189, 186]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Screeching Noise",
-	"weekBefore": "sweep",
-	"weekName": "Arts and Crafters' Week",
-	"weekNameCode": "crafters",
-	"startUnlocked": true,
+  "storyName": "Screeching Noise",
+  "weekBefore": "sweep",
+  "weekName": "Arts and Crafters' Week",
+  "weekNameCode": "crafters",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

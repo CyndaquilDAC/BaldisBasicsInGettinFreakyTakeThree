@@ -1,3 +1,4 @@
+# ! means a file should be added regardless of it it gets ignored prior.
 export/*
 .vscode/*
 .haxelib/
@@ -8,3 +9,4 @@ export/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+oxipng.exe

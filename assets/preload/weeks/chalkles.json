@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Dusty", "chalkles", [146, 113, 253]],
-		["Chuckles", "chalkles", [146, 113, 253]],
-		["Trickster", "chalkles", [146, 113, 253]]
-	],
+  "songs": [
+    ["Dusty", "chalkles", [146, 113, 253]],
+    ["Chuckles", "chalkles", [146, 113, 253]],
+    ["Trickster", "chalkles", [146, 113, 253]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Chalkin' Chalkles Chazam!",
-	"weekBefore": "camping",
-	"weekName": "Chalkles' Week",
-	"weekNameCode": "chalkles",
-	"startUnlocked": true,
+  "storyName": "Chalkin' Chalkles Chazam!",
+  "weekBefore": "camping",
+  "weekName": "Chalkles' Week",
+  "weekNameCode": "chalkles",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Shoe-In", "pomp", [187, 2, 2]],
-		["Pomp-Stomp", "pomp", [187, 2, 2]],
-		["Times-Up", "pomp", [187, 2, 2]]
-	],
+  "songs": [
+    ["Shoe-In", "pomp", [187, 2, 2]],
+    ["Pomp-Stomp", "pomp", [187, 2, 2]],
+    ["Times-Up", "pomp", [187, 2, 2]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Mrs. Pomp's Romp",
-	"weekBefore": "beans",
-	"weekName": "Mrs. Pomp's Week",
-	"weekNameCode": "pomp",
-	"startUnlocked": true,
+  "storyName": "Mrs. Pomp's Romp",
+  "weekBefore": "beans",
+  "weekName": "Mrs. Pomp's Week",
+  "weekNameCode": "pomp",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

@@ -1,78 +1,53 @@
 {
-	"animations": [
-		{
-			"offsets": [
-				-22,
-				-6
-			],
-			"loop": false,
-			"anim": "singLEFT",
-			"fps": 24,
-			"name": "left",
-			"indices": []
-		},
-		{
-			"offsets": [
-				-8,
-				2
-			],
-			"loop": false,
-			"anim": "singDOWN",
-			"fps": 24,
-			"name": "down",
-			"indices": []
-		},
-		{
-			"offsets": [
-				-7,
-				-20
-			],
-			"loop": false,
-			"anim": "singUP",
-			"fps": 24,
-			"name": "up",
-			"indices": []
-		},
-		{
-			"offsets": [
-				5,
-				-2
-			],
-			"loop": false,
-			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "right",
-			"indices": []
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
-			"loop": false,
-			"anim": "idle",
-			"fps": 24,
-			"name": "idle",
-			"indices": []
-		}
-	],
-	"no_antialiasing": true,
-	"image": "characters/bully",
-	"position": [
-		-240,
-		-120
-	],
-	"healthicon": "bully",
-	"flip_x": false,
-	"healthbar_colors": [
-		203,
-		96,
-		0
-	],
-	"camera_position": [
-		200,
-		-10
-	],
-	"sing_duration": 4,
-	"scale": 1
+  "animations": [
+    {
+      "offsets": [-22, -6],
+      "loop": false,
+      "anim": "singLEFT",
+      "fps": 24,
+      "name": "left",
+      "indices": []
+    },
+    {
+      "offsets": [-8, 2],
+      "loop": false,
+      "anim": "singDOWN",
+      "fps": 24,
+      "name": "down",
+      "indices": []
+    },
+    {
+      "offsets": [-7, -20],
+      "loop": false,
+      "anim": "singUP",
+      "fps": 24,
+      "name": "up",
+      "indices": []
+    },
+    {
+      "offsets": [5, -2],
+      "loop": false,
+      "anim": "singRIGHT",
+      "fps": 24,
+      "name": "right",
+      "indices": []
+    },
+    {
+      "offsets": [0, 0],
+      "loop": false,
+      "anim": "idle",
+      "fps": 24,
+      "name": "idle",
+      "indices": []
+    }
+  ],
+  "no_antialiasing": true,
+  "image": "characters/bully",
+  "position": [-240, -120],
+  "healthicon": "bully",
+  "flip_x": false,
+  "healthbar_colors": [203, 96, 0],
+  "camera_position": [200, -10],
+  "sing_duration": 4,
+  "scale": 1
 }

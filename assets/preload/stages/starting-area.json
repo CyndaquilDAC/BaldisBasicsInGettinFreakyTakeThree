@@ -1,16 +1,16 @@
 {
-	"directory": "",
-	"defaultZoom": 0.75,
-	"isPixelStage": false,
+  "directory": "",
+  "defaultZoom": 0.75,
+  "isPixelStage": false,
 
-	"boyfriend": [945, 100],
-	"girlfriend": [400, 130],
-	"opponent": [80, 100],
-	"hide_girlfriend": false,
-	"hide_others": false,
+  "boyfriend": [945, 100],
+  "girlfriend": [400, 130],
+  "opponent": [80, 100],
+  "hide_girlfriend": false,
+  "hide_others": false,
 
-	"camera_boyfriend": [-75, 0],
-	"camera_opponent": [0, 0],
-	"camera_girlfriend": [0, 0],
-	"camera_speed": 1
+  "camera_boyfriend": [-75, 0],
+  "camera_opponent": [0, 0],
+  "camera_girlfriend": [0, 0],
+  "camera_speed": 1
 }

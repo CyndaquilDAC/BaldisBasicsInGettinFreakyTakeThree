@@ -1,34 +1,21 @@
 {
-	"animations": [
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "idle"
-		}
-	],
-	"no_antialiasing": true,
-	"image": "characters/baldi/99/99_gf",
-	"position": [
-		-50,
-		40
-	],
-	"healthicon": "gf",
-	"flip_x": false,
-	"healthbar_colors": [
-		165,
-		0,
-		77
-	],
-	"camera_position": [
-		-250,
-		-110
-	],
-	"sing_duration": 4,
-	"scale": 1.3
+  "animations": [
+    {
+      "loop": false,
+      "offsets": [0, 0],
+      "fps": 24,
+      "anim": "idle",
+      "indices": [],
+      "name": "idle"
+    }
+  ],
+  "no_antialiasing": true,
+  "image": "characters/baldi/99/99_gf",
+  "position": [-50, 40],
+  "healthicon": "gf",
+  "flip_x": false,
+  "healthbar_colors": [165, 0, 77],
+  "camera_position": [-250, -110],
+  "sing_duration": 4,
+  "scale": 1.3
 }

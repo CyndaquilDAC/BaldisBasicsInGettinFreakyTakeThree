@@ -5,323 +5,323 @@ import editors.ChartingState;
 
 using StringTools;
 
-typedef EventNote = {
-	strumTime:Float,
-	event:String,
-	value1:String,
-	value2:String
+typedef EventNote =
+{
+  strumTime:Float,
+  event:String,
+  value1:String,
+  value2:String
 }
 
 class Note extends FlxSprite
 {
-	public var extraData:Map<String,Dynamic> = [];
+  public var extraData:Map<String, Dynamic> = [];
 
-	public var strumTime:Float = 0;
-	public var mustPress:Bool = false;
-	public var noteData:Int = 0;
-	public var canBeHit:Bool = false;
-	public var tooLate:Bool = false;
-	public var wasGoodHit:Bool = false;
-	public var ignoreNote:Bool = false;
-	public var hitByOpponent:Bool = false;
-	public var noteWasHit:Bool = false;
-	public var prevNote:Note;
-	public var nextNote:Note;
+  public var strumTime:Float = 0;
+  public var mustPress:Bool = false;
+  public var noteData:Int = 0;
+  public var canBeHit:Bool = false;
+  public var tooLate:Bool = false;
+  public var wasGoodHit:Bool = false;
+  public var ignoreNote:Bool = false;
+  public var hitByOpponent:Bool = false;
+  public var noteWasHit:Bool = false;
+  public var prevNote:Note;
+  public var nextNote:Note;
 
-	public var spawned:Bool = false;
+  public var spawned:Bool = false;
 
-	public var tail:Array<Note> = []; // for sustains
-	public var parent:Note;
-	public var blockHit:Bool = false; // only works for player
+  public var tail:Array<Note> = []; // for sustains
+  public var parent:Note;
+  public var blockHit:Bool = false; // only works for player
 
-	public var sustainLength:Float = 0;
-	public var isSustainNote:Bool = false;
-	public var noteType(default, set):String = null;
+  public var sustainLength:Float = 0;
+  public var isSustainNote:Bool = false;
+  public var noteType(default, set):String = null;
 
-	public var eventName:String = '';
-	public var eventLength:Int = 0;
-	public var eventVal1:String = '';
-	public var eventVal2:String = '';
+  public var eventName:String = '';
+  public var eventLength:Int = 0;
+  public var eventVal1:String = '';
+  public var eventVal2:String = '';
 
-	public var colorSwap:ColorSwap;
-	public var inEditor:Bool = false;
+  public var colorSwap:ColorSwap;
+  public var inEditor:Bool = false;
 
-	public var animSuffix:String = '';
-	public var gfNote:Bool = false;
-	public var earlyHitMult:Float = 0.5;
-	public var lateHitMult:Float = 1;
-	public var lowPriority:Bool = false;
+  public var animSuffix:String = '';
+  public var gfNote:Bool = false;
+  public var earlyHitMult:Float = 0.5;
+  public var lateHitMult:Float = 1;
+  public var lowPriority:Bool = false;
 
-	public static var swagWidth:Float = 160 * 0.7;
-	
-	private var colArray:Array<String> = ['purple', 'blue', 'green', 'red'];
+  public static var swagWidth:Float = 160 * 0.7;
 
-	// Lua shit
-	public var noteSplashDisabled:Bool = false;
-	public var noteSplashTexture:String = null;
-	public var noteSplashHue:Float = 0;
-	public var noteSplashSat:Float = 0;
-	public var noteSplashBrt:Float = 0;
+  private var colArray:Array<String> = ['purple', 'blue', 'green', 'red'];
 
-	public var offsetX:Float = 0;
-	public var offsetY:Float = 0;
-	public var offsetAngle:Float = 0;
-	public var multAlpha:Float = 1;
-	public var multSpeed(default, set):Float = 1;
+  // Lua shit
+  public var noteSplashDisabled:Bool = false;
+  public var noteSplashTexture:String = null;
+  public var noteSplashHue:Float = 0;
+  public var noteSplashSat:Float = 0;
+  public var noteSplashBrt:Float = 0;
 
-	public var copyX:Bool = true;
-	public var copyY:Bool = true;
-	public var copyAngle:Bool = true;
-	public var copyAlpha:Bool = true;
+  public var offsetX:Float = 0;
+  public var offsetY:Float = 0;
+  public var offsetAngle:Float = 0;
+  public var multAlpha:Float = 1;
+  public var multSpeed(default, set):Float = 1;
 
-	public var hitHealth:Float = 0.023;
-	public var missHealth:Float = 0.0475;
-	public var rating:String = 'unknown';
-	public var ratingMod:Float = 0; //9 = unknown, 0.25 = shit, 0.5 = bad, 0.75 = good, 1 = sick
-	public var ratingDisabled:Bool = false;
+  public var copyX:Bool = true;
+  public var copyY:Bool = true;
+  public var copyAngle:Bool = true;
+  public var copyAlpha:Bool = true;
 
-	public var texture(default, set):String = null;
+  public var hitHealth:Float = 0.023;
+  public var missHealth:Float = 0.0475;
+  public var rating:String = 'unknown';
+  public var ratingMod:Float = 0; // 9 = unknown, 0.25 = shit, 0.5 = bad, 0.75 = good, 1 = sick
+  public var ratingDisabled:Bool = false;
 
-	public var noAnimation:Bool = false;
-	public var noMissAnimation:Bool = false;
-	public var hitCausesMiss:Bool = false;
-	public var distance:Float = 2000; //plan on doing scroll directions soon -bb
+  public var texture(default, set):String = null;
 
-	public var hitsoundDisabled:Bool = false;
+  public var noAnimation:Bool = false;
+  public var noMissAnimation:Bool = false;
+  public var hitCausesMiss:Bool = false;
+  public var distance:Float = 2000; // plan on doing scroll directions soon -bb
 
-	private function set_multSpeed(value:Float):Float
-	{
-		resizeByRatio(value / multSpeed);
-		multSpeed = value;
-		return value;
-	}
+  public var hitsoundDisabled:Bool = false;
 
-	public function resizeByRatio(ratio:Float) //haha funny twitter shit
-	{
-		if(isSustainNote && !animation.curAnim.name.endsWith('end'))
-		{
-			scale.y *= ratio;
-			updateHitbox();
-		}
-	}
+  private function set_multSpeed(value:Float):Float
+  {
+    resizeByRatio(value / multSpeed);
+    multSpeed = value;
+    return value;
+  }
 
-	private function set_texture(value:String):String
-	{
-		if(texture != value)
-		{
-			reloadNote('', value);
-		}
-		texture = value;
-		return value;
-	}
+  public function resizeByRatio(ratio:Float) // haha funny twitter shit
+  {
+    if (isSustainNote && !animation.curAnim.name.endsWith('end'))
+    {
+      scale.y *= ratio;
+      updateHitbox();
+    }
+  }
 
-	private function set_noteType(value:String):String
-	{
-		noteSplashTexture = PlayState.SONG.splashSkin;
-		if (noteData > -1 && noteData < ClientPrefs.arrowHSV.length)
-		{
-			colorSwap.hue = ClientPrefs.arrowHSV[noteData][0] / 360;
-			colorSwap.saturation = ClientPrefs.arrowHSV[noteData][1] / 100;
-			colorSwap.brightness = ClientPrefs.arrowHSV[noteData][2] / 100;
-		}
+  private function set_texture(value:String):String
+  {
+    if (texture != value)
+    {
+      reloadNote('', value);
+    }
+    texture = value;
+    return value;
+  }
 
-		if(noteData > -1 && noteType != value)
-		{
-			switch(value)
-			{
-				case 'Alt Animation':
-					animSuffix = '-alt';
-				case 'No Animation':
-					noAnimation = true;
-					noMissAnimation = true;
-				case 'GF Sing':
-					gfNote = true;
-			}
-			noteType = value;
-		}
-		noteSplashHue = colorSwap.hue;
-		noteSplashSat = colorSwap.saturation;
-		noteSplashBrt = colorSwap.brightness;
-		return value;
-	}
+  private function set_noteType(value:String):String
+  {
+    noteSplashTexture = PlayState.SONG.splashSkin;
+    if (noteData > -1 && noteData < ClientPrefs.arrowHSV.length)
+    {
+      colorSwap.hue = ClientPrefs.arrowHSV[noteData][0] / 360;
+      colorSwap.saturation = ClientPrefs.arrowHSV[noteData][1] / 100;
+      colorSwap.brightness = ClientPrefs.arrowHSV[noteData][2] / 100;
+    }
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
-	{
-		super();
+    if (noteData > -1 && noteType != value)
+    {
+      switch (value)
+      {
+        case 'Alt Animation':
+          animSuffix = '-alt';
+        case 'No Animation':
+          noAnimation = true;
+          noMissAnimation = true;
+        case 'GF Sing':
+          gfNote = true;
+      }
+      noteType = value;
+    }
+    noteSplashHue = colorSwap.hue;
+    noteSplashSat = colorSwap.saturation;
+    noteSplashBrt = colorSwap.brightness;
+    return value;
+  }
 
-		if (prevNote == null)
-			prevNote = this;
+  public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
+  {
+    super();
 
-		this.prevNote = prevNote;
-		isSustainNote = sustainNote;
-		this.inEditor = inEditor;
+    if (prevNote == null) prevNote = this;
 
-		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
-		// MAKE SURE ITS DEFINITELY OFF SCREEN?
-		y -= 2000;
-		this.strumTime = strumTime;
-		if(!inEditor) this.strumTime += ClientPrefs.noteOffset;
+    this.prevNote = prevNote;
+    isSustainNote = sustainNote;
+    this.inEditor = inEditor;
 
-		this.noteData = noteData;
+    x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
+    // MAKE SURE ITS DEFINITELY OFF SCREEN?
+    y -= 2000;
+    this.strumTime = strumTime;
+    if (!inEditor) this.strumTime += ClientPrefs.noteOffset;
 
-		if(noteData > -1)
-		{
-			texture = '';
-			colorSwap = new ColorSwap();
-			shader = colorSwap.shader;
+    this.noteData = noteData;
 
-			x += swagWidth * (noteData);
-			if(!isSustainNote && noteData > -1 && noteData < 4)
-			{
-				var animToPlay:String = '';
-				animToPlay = colArray[noteData % 4];
-				animation.play(animToPlay + 'Scroll');
-			}
-		}
+    if (noteData > -1)
+    {
+      texture = '';
+      colorSwap = new ColorSwap();
+      shader = colorSwap.shader;
 
-		if(prevNote!=null)
-			prevNote.nextNote = this;
+      x += swagWidth * (noteData);
+      if (!isSustainNote && noteData > -1 && noteData < 4)
+      {
+        var animToPlay:String = '';
+        animToPlay = colArray[noteData % 4];
+        animation.play(animToPlay + 'Scroll');
+      }
+    }
 
-		if (isSustainNote && prevNote != null)
-		{
-			setGraphicSize(Std.int(width * 0.7));
+    if (prevNote != null) prevNote.nextNote = this;
 
-			alpha = 0.45;
-			multAlpha = 0.45;
-			hitsoundDisabled = true;
-			if(ClientPrefs.downScroll) flipY = true;
+    if (isSustainNote && prevNote != null)
+    {
+      setGraphicSize(Std.int(width * 0.7));
 
-			offsetX += width / 2;
-			copyAngle = false;
+      alpha = 0.45;
+      multAlpha = 0.45;
+      hitsoundDisabled = true;
+      if (ClientPrefs.downScroll) flipY = true;
 
-			animation.play(colArray[noteData % 4] + 'holdend');
+      offsetX += width / 2;
+      copyAngle = false;
 
-			updateHitbox();
+      animation.play(colArray[noteData % 4] + 'holdend');
 
-			offsetX -= width / 2;
+      updateHitbox();
 
-			if (prevNote.isSustainNote)
-			{
-				prevNote.animation.play(colArray[prevNote.noteData % 4] + 'hold');
+      offsetX -= width / 2;
 
-				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
-				if(PlayState.instance != null)
-				{
-					prevNote.scale.y *= PlayState.instance.songSpeed;
-				}
+      if (prevNote.isSustainNote)
+      {
+        prevNote.animation.play(colArray[prevNote.noteData % 4] + 'hold');
 
-				prevNote.updateHitbox();
-			}
-		}
-		else if(!isSustainNote)
-		{
-			earlyHitMult = 1;
-		}
-		x += offsetX;
-	}
+        prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
+        if (PlayState.instance != null)
+        {
+          prevNote.scale.y *= PlayState.instance.songSpeed;
+        }
 
-	var lastNoteOffsetXForPixelAutoAdjusting:Float = 0;
-	var lastNoteScaleToo:Float = 1;
-	public var originalHeightForCalcs:Float = 6;
+        prevNote.updateHitbox();
+      }
+    }
+    else if (!isSustainNote)
+    {
+      earlyHitMult = 1;
+    }
+    x += offsetX;
+  }
 
-	function reloadNote(?prefix:String = '', ?texture:String = '', ?suffix:String = '') {
-		if(prefix == null) prefix = '';
-		if(texture == null) texture = '';
-		if(suffix == null) suffix = '';
+  var lastNoteOffsetXForPixelAutoAdjusting:Float = 0;
+  var lastNoteScaleToo:Float = 1;
 
-		var skin:String = texture;
-		if(texture.length < 1) {
-			skin = PlayState.SONG.arrowSkin;
-			if(skin == null || skin.length < 1) {
-				skin = 'ui/notes';
-			}
-		}
+  public var originalHeightForCalcs:Float = 6;
 
-		var animName:String = null;
-		if(animation.curAnim != null) {
-			animName = animation.curAnim.name;
-		}
+  function reloadNote(?prefix:String = '', ?texture:String = '', ?suffix:String = '')
+  {
+    if (prefix == null) prefix = '';
+    if (texture == null) texture = '';
+    if (suffix == null) suffix = '';
 
-		var arraySkin:Array<String> = skin.split('/');
-		arraySkin[arraySkin.length-1] = prefix + arraySkin[arraySkin.length-1] + suffix;
+    var skin:String = texture;
+    if (texture.length < 1)
+    {
+      skin = PlayState.SONG.arrowSkin;
+      if (skin == null || skin.length < 1)
+      {
+        skin = 'ui/notes';
+      }
+    }
 
-		var lastScaleY:Float = scale.y;
-		var blahblah:String = arraySkin.join('/');
+    var animName:String = null;
+    if (animation.curAnim != null)
+    {
+      animName = animation.curAnim.name;
+    }
 
-		frames = Paths.getSparrowAtlas(blahblah);
-		loadNoteAnims();
-		antialiasing = false;
+    var arraySkin:Array<String> = skin.split('/');
+    arraySkin[arraySkin.length - 1] = prefix + arraySkin[arraySkin.length - 1] + suffix;
 
-		if(isSustainNote)
-		{
-			scale.y = lastScaleY;
-		}
+    var lastScaleY:Float = scale.y;
+    var blahblah:String = arraySkin.join('/');
 
-		updateHitbox();
+    frames = Paths.getSparrowAtlas(blahblah);
+    loadNoteAnims();
+    antialiasing = false;
 
-		if(animName != null)
-			animation.play(animName, true);
+    if (isSustainNote)
+    {
+      scale.y = lastScaleY;
+    }
 
-		if(inEditor) {
-			setGraphicSize(ChartingState.GRID_SIZE, ChartingState.GRID_SIZE);
-			updateHitbox();
-		}
-	}
+    updateHitbox();
 
-	function loadNoteAnims()
-	{
-		animation.addByPrefix(colArray[noteData] + 'Scroll', colArray[noteData] + '0');
+    if (animName != null) animation.play(animName, true);
 
-		if (isSustainNote)
-		{
-			animation.addByPrefix('purpleholdend', 'pruple end hold'); // ?????
-			animation.addByPrefix(colArray[noteData] + 'holdend', colArray[noteData] + ' hold end');
-			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
-		}
+    if (inEditor)
+    {
+      setGraphicSize(ChartingState.GRID_SIZE, ChartingState.GRID_SIZE);
+      updateHitbox();
+    }
+  }
 
-		if(PlayState.SONG.arrowSkin == "ui/yctp_notes")
-		{
-			setGraphicSize(Std.int(width * 0.6));
-		}
-		else
-		{
-			setGraphicSize(Std.int(width * 0.8));
-		}
+  function loadNoteAnims()
+  {
+    animation.addByPrefix(colArray[noteData] + 'Scroll', colArray[noteData] + '0');
 
-		updateHitbox();
-	}
+    if (isSustainNote)
+    {
+      animation.addByPrefix('purpleholdend', 'pruple end hold'); // ?????
+      animation.addByPrefix(colArray[noteData] + 'holdend', colArray[noteData] + ' hold end');
+      animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
+    }
 
-	override function update(elapsed:Float)
-	{
-		super.update(elapsed);
+    if (PlayState.SONG.arrowSkin == "ui/yctp_notes")
+    {
+      setGraphicSize(Std.int(width * 0.6));
+    }
+    else
+    {
+      setGraphicSize(Std.int(width * 0.8));
+    }
 
-		if (mustPress)
-		{
-			// ok river
-			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult)
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
-				canBeHit = true;
-			else
-				canBeHit = false;
+    updateHitbox();
+  }
 
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
-				tooLate = true;
-		}
-		else
-		{
-			canBeHit = false;
+  override function update(elapsed:Float)
+  {
+    super.update(elapsed);
 
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
-			{
-				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
-					wasGoodHit = true;
-			}
-		}
+    if (mustPress)
+    {
+      // ok river
+      if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult)
+        && strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult)) canBeHit = true;
+      else
+        canBeHit = false;
 
-		if (tooLate && !inEditor)
-		{
-			if (alpha > 0.3)
-				alpha = 0.3;
-		}
-	}
+      if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit) tooLate = true;
+    }
+    else
+    {
+      canBeHit = false;
+
+      if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
+      {
+        if ((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition) wasGoodHit = true;
+      }
+    }
+
+    if (tooLate && !inEditor)
+    {
+      if (alpha > 0.3) alpha = 0.3;
+    }
+  }
 }

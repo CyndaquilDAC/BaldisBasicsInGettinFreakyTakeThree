@@ -20,232 +20,238 @@ import openfl.errors.ArgumentError;
  */
 class SpriteAnimationLibrary
 {
-	public var frameRate:Float;
+  public var frameRate:Float;
 
-	private var _atlas:Map<String, SpriteData>;
-	private var _symbolData:Map<String, SymbolData>;
-	private var _symbolPool:Map<String, Array<SpriteSymbol>>;
-	private var _defaultSymbolName:String;
-	private var _texture:BitmapData;
-	public var smoothing:Bool = true;
+  private var _atlas:Map<String, SpriteData>;
+  private var _symbolData:Map<String, SymbolData>;
+  private var _symbolPool:Map<String, Array<SpriteSymbol>>;
+  private var _defaultSymbolName:String;
+  private var _texture:BitmapData;
 
-	public static inline var BITMAP_SYMBOL_NAME:String = "___atlas_sprite___";
+  public var smoothing:Bool = true;
 
-	private static var STD_MATRIX3D_DATA:Matrix3DData = {
-		m00: 1,
-		m01: 0,
-		m02: 0,
-		m03: 0,
-		m10: 0,
-		m11: 1,
-		m12: 0,
-		m13: 0,
-		m20: 0,
-		m21: 0,
-		m22: 1,
-		m23: 0,
-		m30: 0,
-		m31: 0,
-		m32: 0,
-		m33: 1
-	};
+  public static inline var BITMAP_SYMBOL_NAME:String = "___atlas_sprite___";
 
-	public function new(data:AnimationData, atlas:AtlasData, texture:BitmapData)
-	{
-		parseAnimationData(data);
-		parseAtlasData(atlas);
-		_texture = texture;
-		_symbolPool = new Map();
-	}
+  private static var STD_MATRIX3D_DATA:Matrix3DData =
+    {
+      m00: 1,
+      m01: 0,
+      m02: 0,
+      m03: 0,
+      m10: 0,
+      m11: 1,
+      m12: 0,
+      m13: 0,
+      m20: 0,
+      m21: 0,
+      m22: 1,
+      m23: 0,
+      m30: 0,
+      m31: 0,
+      m32: 0,
+      m33: 1
+    };
 
-	public function hasAnimation(name:String):Bool
-	{
-		return hasSymbol(name);
-	}
+  public function new(data:AnimationData, atlas:AtlasData, texture:BitmapData)
+  {
+    parseAnimationData(data);
+    parseAtlasData(atlas);
+    _texture = texture;
+    _symbolPool = new Map();
+  }
 
-	public function createAnimation(noAntialiasing:Bool, symbol:String = null):SpriteMovieClip
-	{
-		this.smoothing = !noAntialiasing;
-		symbol = (symbol != null) ? symbol : _defaultSymbolName;
-		if (!hasSymbol(symbol))
-		{
-			throw new ArgumentError("Symbol not found: " + symbol);
-		}
-		return new SpriteMovieClip(getSymbol(symbol));
-	}
+  public function hasAnimation(name:String):Bool
+  {
+    return hasSymbol(name);
+  }
 
-	public function getAnimationNames(prefix:String = ""):Array<String>
-	{
-		var out = new Array<String>();
+  public function createAnimation(noAntialiasing:Bool, symbol:String = null):SpriteMovieClip
+  {
+    this.smoothing = !noAntialiasing;
+    symbol = (symbol != null) ? symbol : _defaultSymbolName;
+    if (!hasSymbol(symbol))
+    {
+      throw new ArgumentError("Symbol not found: " + symbol);
+    }
+    return new SpriteMovieClip(getSymbol(symbol));
+  }
 
-		for (name in _symbolData.keys())
-		{
-			if (name != BITMAP_SYMBOL_NAME && name.indexOf(prefix) == 0)
-			{
-				out.push(name);
-			}
-		}
+  public function getAnimationNames(prefix:String = ""):Array<String>
+  {
+    var out = new Array<String>();
 
-		out.sort(function(a1, a2):Int
-		{
-			a1 = a1.toLowerCase();
-			a2 = a2.toLowerCase();
-			if (a1 < a2)
-			{
-				return -1;
-			}
-			else if (a1 > a2)
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-		});
+    for (name in _symbolData.keys())
+    {
+      if (name != BITMAP_SYMBOL_NAME && name.indexOf(prefix) == 0)
+      {
+        out.push(name);
+      }
+    }
 
-		return out;
-	}
+    out.sort(function(a1, a2):Int {
+      a1 = a1.toLowerCase();
+      a2 = a2.toLowerCase();
+      if (a1 < a2)
+      {
+        return -1;
+      }
+      else if (a1 > a2)
+      {
+        return 1;
+      }
+      else
+      {
+        return 0;
+      }
+    });
 
-	private function getSpriteData(name:String):SpriteData
-	{
-		return _atlas.get(name);
-	}
+    return out;
+  }
 
-	private function hasSymbol(name:String):Bool
-	{
-		return _symbolData.exists(name);
-	}
+  private function getSpriteData(name:String):SpriteData
+  {
+    return _atlas.get(name);
+  }
 
-	@:access(animateatlas)
-	@:allow(AtlasFrameMaker)
-	private function getSymbol(name:String):SpriteSymbol
-	{
-		var pool:Array<SpriteSymbol> = getSymbolPool(name);
-		if (pool.length == 0)
-		{
-			var symbol:SpriteSymbol = new SpriteSymbol(getSymbolData(name), this, _texture);
-			symbol.smoothing = smoothing;
-			return symbol;
-		}
-		else
-		{
-			return pool.pop();
-		}
-	}
+  private function hasSymbol(name:String):Bool
+  {
+    return _symbolData.exists(name);
+  }
 
-	private function putSymbol(symbol:SpriteSymbol):Void
-	{
-		symbol.reset();
-		var pool:Array<SpriteSymbol> = getSymbolPool(symbol.symbolName);
-		pool.push(symbol);
-		symbol.currentFrame = 0;
-	}
+  @:access(animateatlas)
+  @:allow(AtlasFrameMaker)
+  private function getSymbol(name:String):SpriteSymbol
+  {
+    var pool:Array<SpriteSymbol> = getSymbolPool(name);
+    if (pool.length == 0)
+    {
+      var symbol:SpriteSymbol = new SpriteSymbol(getSymbolData(name), this, _texture);
+      symbol.smoothing = smoothing;
+      return symbol;
+    }
+    else
+    {
+      return pool.pop();
+    }
+  }
 
-	private function getSymbolPool(name:String):Array<SpriteSymbol>
-	{
-		var pool:Array<SpriteSymbol> = _symbolPool.get(name);
-		if (pool == null)
-		{
-			pool = [];
-			_symbolPool.set(name, pool);
-		}
-		return pool;
-	}
+  private function putSymbol(symbol:SpriteSymbol):Void
+  {
+    symbol.reset();
+    var pool:Array<SpriteSymbol> = getSymbolPool(symbol.symbolName);
+    pool.push(symbol);
+    symbol.currentFrame = 0;
+  }
 
-	private function parseAnimationData(data:AnimationData):Void
-	{
-		var metaData = data.metadata;
+  private function getSymbolPool(name:String):Array<SpriteSymbol>
+  {
+    var pool:Array<SpriteSymbol> = _symbolPool.get(name);
+    if (pool == null)
+    {
+      pool = [];
+      _symbolPool.set(name, pool);
+    }
+    return pool;
+  }
 
-		if (metaData != null && metaData.framerate != null && metaData.framerate > 0)
-		{
-			frameRate = (metaData.framerate);
-		}
-		else
-		{
-			frameRate = 24;
-		}
+  private function parseAnimationData(data:AnimationData):Void
+  {
+    var metaData = data.metadata;
 
-		_symbolData = new Map();
+    if (metaData != null && metaData.framerate != null && metaData.framerate > 0)
+    {
+      frameRate = (metaData.framerate);
+    }
+    else
+    {
+      frameRate = 24;
+    }
 
-		var symbols = data.SYMBOL_DICTIONARY.Symbols;
-		for (symbolData in symbols)
-		{
-			_symbolData[symbolData.SYMBOL_name] = preprocessSymbolData(symbolData);
-		}
+    _symbolData = new Map();
 
-		var defaultSymbolData:SymbolData = preprocessSymbolData(data.ANIMATION);
-		_defaultSymbolName = defaultSymbolData.SYMBOL_name;
-		_symbolData.set(_defaultSymbolName, defaultSymbolData);
+    var symbols = data.SYMBOL_DICTIONARY.Symbols;
+    for (symbolData in symbols)
+    {
+      _symbolData[symbolData.SYMBOL_name] = preprocessSymbolData(symbolData);
+    }
 
-		_symbolData.set(BITMAP_SYMBOL_NAME, {
-			SYMBOL_name: BITMAP_SYMBOL_NAME,
-			TIMELINE: {
-				LAYERS: []
-			}
-		});
-	}
+    var defaultSymbolData:SymbolData = preprocessSymbolData(data.ANIMATION);
+    _defaultSymbolName = defaultSymbolData.SYMBOL_name;
+    _symbolData.set(_defaultSymbolName, defaultSymbolData);
 
-	private function preprocessSymbolData(symbolData:SymbolData):SymbolData
-	{
-		var timeLineData:SymbolTimelineData = symbolData.TIMELINE;
-		var layerDates:Array<LayerData> = timeLineData.LAYERS;
+    _symbolData.set(BITMAP_SYMBOL_NAME,
+      {
+        SYMBOL_name: BITMAP_SYMBOL_NAME,
+        TIMELINE:
+          {
+            LAYERS: []
+          }
+      });
+  }
 
-		if (!timeLineData.sortedForRender)
-		{
-			timeLineData.sortedForRender = true;
-			layerDates.reverse();
-		}
+  private function preprocessSymbolData(symbolData:SymbolData):SymbolData
+  {
+    var timeLineData:SymbolTimelineData = symbolData.TIMELINE;
+    var layerDates:Array<LayerData> = timeLineData.LAYERS;
 
-		for (layerData in layerDates)
-		{
-			var frames:Array<LayerFrameData> = layerData.Frames;
+    if (!timeLineData.sortedForRender)
+    {
+      timeLineData.sortedForRender = true;
+      layerDates.reverse();
+    }
 
-			for (frame in frames)
-			{
-				var elements:Array<ElementData> = frame.elements;
-				for (e in 0...elements.length)
-				{
-					var element:ElementData = elements[e];
-					if (element.ATLAS_SPRITE_instance != null)
-					{
-						element = elements[e] = {
-							SYMBOL_Instance: {
-								SYMBOL_name: BITMAP_SYMBOL_NAME,
-								Instance_Name: "InstName",
-								bitmap: element.ATLAS_SPRITE_instance,
-								symbolType: SymbolType.GRAPHIC,
-								firstFrame: 0,
-								loop: LoopMode.LOOP,
-								transformationPoint: {
-									x: 0,
-									y: 0
-								},
-								Matrix3D: STD_MATRIX3D_DATA
-							}
-						};
-					}
-				}
-			}
-		}
+    for (layerData in layerDates)
+    {
+      var frames:Array<LayerFrameData> = layerData.Frames;
 
-		return symbolData;
-	}
+      for (frame in frames)
+      {
+        var elements:Array<ElementData> = frame.elements;
+        for (e in 0...elements.length)
+        {
+          var element:ElementData = elements[e];
+          if (element.ATLAS_SPRITE_instance != null)
+          {
+            element = elements[e] =
+              {
+                SYMBOL_Instance:
+                  {
+                    SYMBOL_name: BITMAP_SYMBOL_NAME,
+                    Instance_Name: "InstName",
+                    bitmap: element.ATLAS_SPRITE_instance,
+                    symbolType: SymbolType.GRAPHIC,
+                    firstFrame: 0,
+                    loop: LoopMode.LOOP,
+                    transformationPoint:
+                      {
+                        x: 0,
+                        y: 0
+                      },
+                    Matrix3D: STD_MATRIX3D_DATA
+                  }
+              };
+          }
+        }
+      }
+    }
 
-	private function parseAtlasData(atlas:AtlasData):Void 
-	{
-		_atlas = new Map<String, SpriteData>();
-		if (atlas.ATLAS != null && atlas.ATLAS.SPRITES != null) 
-		{
-			for (s in atlas.ATLAS.SPRITES)
-			{
-				_atlas.set(s.SPRITE.name, s.SPRITE);
-			}
-		}
-	}
+    return symbolData;
+  }
 
-	private function getSymbolData(name:String):SymbolData
-	{
-		return _symbolData.get(name);
-	}
+  private function parseAtlasData(atlas:AtlasData):Void
+  {
+    _atlas = new Map<String, SpriteData>();
+    if (atlas.ATLAS != null && atlas.ATLAS.SPRITES != null)
+    {
+      for (s in atlas.ATLAS.SPRITES)
+      {
+        _atlas.set(s.SPRITE.name, s.SPRITE);
+      }
+    }
+  }
+
+  private function getSymbolData(name:String):SymbolData
+  {
+    return _symbolData.get(name);
+  }
 }

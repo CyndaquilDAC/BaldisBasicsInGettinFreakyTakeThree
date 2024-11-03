@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Playtime", "playtime", [255, 61, 61]],
-		["Get-Away-Time", "playtime", [255, 61, 61]],
-		["Snip-Snap", "playtime", [255, 61, 61]]
-	],
+  "songs": [
+    ["Playtime", "playtime", [255, 61, 61]],
+    ["Get-Away-Time", "playtime", [255, 61, 61]],
+    ["Snip-Snap", "playtime", [255, 61, 61]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Let's play!",
-	"weekBefore": "principal",
-	"weekName": "Playtime's Week",
-	"weekNameCode": "playtime",
-	"startUnlocked": true,
+  "storyName": "Let's play!",
+  "weekBefore": "principal",
+  "weekName": "Playtime's Week",
+  "weekNameCode": "playtime",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

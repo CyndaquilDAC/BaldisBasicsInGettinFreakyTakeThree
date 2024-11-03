@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Penny-Pinching", "johnny", [146, 113, 253]],
-		["Say-Hi", "johnny", [146, 113, 253]],
-		["Jerk", "johnny", [146, 113, 253]]
-	],
+  "songs": [
+    ["Penny-Pinching", "johnny", [146, 113, 253]],
+    ["Say-Hi", "johnny", [146, 113, 253]],
+    ["Jerk", "johnny", [146, 113, 253]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Johnny's Shoppin' Showdown!",
-	"weekBefore": "farming",
-	"weekName": "Johnny's Week",
-	"weekNameCode": "johnny",
-	"startUnlocked": true,
+  "storyName": "Johnny's Shoppin' Showdown!",
+  "weekBefore": "farming",
+  "weekName": "Johnny's Week",
+  "weekNameCode": "johnny",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

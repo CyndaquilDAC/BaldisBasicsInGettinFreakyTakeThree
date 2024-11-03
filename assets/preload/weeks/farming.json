@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Maize", "baldi", [44, 188, 49]],
-		["Flagpole", "bf", [49, 176, 209]],
-		["Reaping", "reap", [9, 134, 2]]
-	],
+  "songs": [
+    ["Maize", "baldi", [44, 188, 49]],
+    ["Flagpole", "bf", [49, 176, 209]],
+    ["Reaping", "reap", [9, 134, 2]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Farming Frenzy!",
-	"weekBefore": "pomp",
-	"weekName": "Farming Week",
-	"weekNameCode": "farming",
-	"startUnlocked": true,
+  "storyName": "Farming Frenzy!",
+  "weekBefore": "pomp",
+  "weekName": "Farming Week",
+  "weekNameCode": "farming",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

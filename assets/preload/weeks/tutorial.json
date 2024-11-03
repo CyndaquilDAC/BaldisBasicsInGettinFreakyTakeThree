@@ -1,21 +1,15 @@
 {
-	"songs": [
-		["How-To-Play", "gf", [146, 113, 253]]
-	],
+  "songs": [["How-To-Play", "gf", [146, 113, 253]]],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "How to play the game!",
-	"weekBefore": "tutorial",
-	"weekName": "Tutorial Week",
-	"weekNameCode": "tutorial",
-	"startUnlocked": true,
+  "storyName": "How to play the game!",
+  "weekBefore": "tutorial",
+  "weekName": "Tutorial Week",
+  "weekNameCode": "tutorial",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

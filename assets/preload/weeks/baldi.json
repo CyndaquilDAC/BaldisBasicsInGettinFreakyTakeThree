@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Basically-Sing", "baldi", [44, 188, 49]],
-		["Critical-Thinking", "baldi", [44, 188, 49]],
-		["99", "baldi", [44, 188, 49]]
-	],
+  "songs": [
+    ["Basically-Sing", "baldi", [44, 188, 49]],
+    ["Critical-Thinking", "baldi", [44, 188, 49]],
+    ["99", "baldi", [44, 188, 49]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Baldi's Funtastic Learningation Week!",
-	"weekBefore": "tutorial",
-	"weekName": "Baldi's Week",
-	"weekNameCode": "baldi",
-	"startUnlocked": true,
+  "storyName": "Baldi's Funtastic Learningation Week!",
+  "weekBefore": "tutorial",
+  "weekName": "Baldi's Week",
+  "weekNameCode": "baldi",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

@@ -5,57 +5,64 @@ import flixel.FlxSprite;
 
 class NoteSplash extends FlxSprite
 {
-	public var colorSwap:ColorSwap = null;
-	private var idleAnim:String;
-	private var textureLoaded:String = null;
+  public var colorSwap:ColorSwap = null;
 
-	public function new(x:Float = 0, y:Float = 0, ?note:Int = 0) {
-		super(x, y);
+  private var idleAnim:String;
+  private var textureLoaded:String = null;
 
-		var skin:String = 'ui/noteSplashes';
-		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+  public function new(x:Float = 0, y:Float = 0, ?note:Int = 0)
+  {
+    super(x, y);
 
-		loadAnims(skin);
-		
-		colorSwap = new ColorSwap();
-		shader = colorSwap.shader;
+    var skin:String = 'ui/noteSplashes';
+    if (PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 
-		setupNoteSplash(x, y, note);
-		antialiasing = false;
-	}
+    loadAnims(skin);
 
-	public function setupNoteSplash(x:Float, y:Float, note:Int = 0, texture:String = null, hueColor:Float = 0, satColor:Float = 0, brtColor:Float = 0) {
-		setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
-		alpha = 0.6;
+    colorSwap = new ColorSwap();
+    shader = colorSwap.shader;
 
-		if(texture == null) {
-			texture = 'ui/noteSplashes';
-			if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
-		}
+    setupNoteSplash(x, y, note);
+    antialiasing = false;
+  }
 
-		if(textureLoaded != texture) {
-			loadAnims(texture);
-		}
-		colorSwap.hue = hueColor;
-		colorSwap.saturation = satColor;
-		colorSwap.brightness = brtColor;
-		offset.set(10, 10);
+  public function setupNoteSplash(x:Float, y:Float, note:Int = 0, texture:String = null, hueColor:Float = 0, satColor:Float = 0, brtColor:Float = 0)
+  {
+    setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
+    alpha = 0.6;
 
-		animation.play('note' + note, true);
-		if(animation.curAnim != null)animation.curAnim.frameRate = 24 + FlxG.random.int(-2, 2);
-	}
+    if (texture == null)
+    {
+      texture = 'ui/noteSplashes';
+      if (PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
+    }
 
-	function loadAnims(skin:String) {
-		frames = Paths.getSparrowAtlas(skin);
-		animation.addByPrefix("note1", "note splash blue", 24, false);
-		animation.addByPrefix("note2", "note splash green", 24, false);
-		animation.addByPrefix("note0", "note splash purple", 24, false);
-		animation.addByPrefix("note3", "note splash red", 24, false);
-	}
+    if (textureLoaded != texture)
+    {
+      loadAnims(texture);
+    }
+    colorSwap.hue = hueColor;
+    colorSwap.saturation = satColor;
+    colorSwap.brightness = brtColor;
+    offset.set(10, 10);
 
-	override function update(elapsed:Float) {
-		if(animation.curAnim != null)if(animation.curAnim.finished) kill();
+    animation.play('note' + note, true);
+    if (animation.curAnim != null) animation.curAnim.frameRate = 24 + FlxG.random.int(-2, 2);
+  }
 
-		super.update(elapsed);
-	}
+  function loadAnims(skin:String)
+  {
+    frames = Paths.getSparrowAtlas(skin);
+    animation.addByPrefix("note1", "note splash blue", 24, false);
+    animation.addByPrefix("note2", "note splash green", 24, false);
+    animation.addByPrefix("note0", "note splash purple", 24, false);
+    animation.addByPrefix("note3", "note splash red", 24, false);
+  }
+
+  override function update(elapsed:Float)
+  {
+    if (animation.curAnim != null) if (animation.curAnim.finished) kill();
+
+    super.update(elapsed);
+  }
 }

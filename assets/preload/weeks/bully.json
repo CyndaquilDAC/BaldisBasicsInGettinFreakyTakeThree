@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["This-is-a-Song", "bully", [203, 96, 0]],
-		["Gimme", "bully", [203, 96, 0]],
-		["Boredom", "bully", [203, 96, 0]]
-	],
+  "songs": [
+    ["This-is-a-Song", "bully", [203, 96, 0]],
+    ["Gimme", "bully", [203, 96, 0]],
+    ["Boredom", "bully", [203, 96, 0]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "No items, no pass!",
-	"weekBefore": "playtime",
-	"weekName": "Bully's Week",
-	"weekNameCode": "bully",
-	"startUnlocked": true,
+  "storyName": "No items, no pass!",
+  "weekBefore": "playtime",
+  "weekName": "Bully's Week",
+  "weekNameCode": "bully",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

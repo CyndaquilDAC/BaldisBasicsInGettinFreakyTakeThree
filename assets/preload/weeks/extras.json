@@ -1,32 +1,28 @@
 {
-	"songs": [
-		["Batting-Pracitce", "extra/timtom", [1, 151, 246]],
-		["Recoil", "extra/dr-reflex", [1, 151, 246]],
-		["Forgotten", "extra/zero-prize", [44, 188, 49]],
-		["DSCI", "extra/dsci", [1, 151, 246]],
-		["Party-Foul", "extra/spoop-balloon", [1, 151, 246]],
-		["Simples", "extra/bladder", [44, 188, 49]],
-		["Good-Marks", "extra/baldigrey", [188, 188, 188]],
-		["Misc", "extra/squidward", [146, 113, 253]],
-		["Riveting", "extra/techno", [1, 151, 246]],
-		["Organic", "extra/alex", [1, 151, 246]],
-		["Disjointed", "extra/elbow-joint-grey", [1, 151, 246]],
-		["Entombed", "extra/baldi-bib", [44, 188, 49]]
-	],
+  "songs": [
+    ["Batting-Pracitce", "extra/timtom", [1, 151, 246]],
+    ["Recoil", "extra/dr-reflex", [1, 151, 246]],
+    ["Forgotten", "extra/zero-prize", [44, 188, 49]],
+    ["DSCI", "extra/dsci", [1, 151, 246]],
+    ["Party-Foul", "extra/spoop-balloon", [1, 151, 246]],
+    ["Simples", "extra/bladder", [44, 188, 49]],
+    ["Good-Marks", "extra/baldigrey", [188, 188, 188]],
+    ["Misc", "extra/squidward", [146, 113, 253]],
+    ["Riveting", "extra/techno", [1, 151, 246]],
+    ["Organic", "extra/alex", [1, 151, 246]],
+    ["Disjointed", "extra/elbow-joint-grey", [1, 151, 246]],
+    ["Entombed", "extra/baldi-bib", [44, 188, 49]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Extras",
-	"weekBefore": "null",
-	"weekName": "Extras",
-	"weekNameCode": "extras",
-	"startUnlocked": true,
+  "storyName": "Extras",
+  "weekBefore": "null",
+  "weekName": "Extras",
+  "weekNameCode": "extras",
+  "startUnlocked": true,
 
-	"hideStoryMode": true,
-	"hideFreeplay": false
+  "hideStoryMode": true,
+  "hideFreeplay": false
 }

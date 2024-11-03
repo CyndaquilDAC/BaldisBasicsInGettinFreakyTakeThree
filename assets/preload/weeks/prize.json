@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Meandering", "1pr", [0, 137, 126]],
-		["First-Prize", "1pr", [0, 137, 126]],
-		["Science-Fair", "1pr", [0, 137, 126]]
-	],
+  "songs": [
+    ["Meandering", "1pr", [0, 137, 126]],
+    ["First-Prize", "1pr", [0, 137, 126]],
+    ["Science-Fair", "1pr", [0, 137, 126]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Will you marry me?",
-	"weekBefore": "crafters",
-	"weekName": "First Prize's Week",
-	"weekNameCode": "prize",
-	"startUnlocked": true,
+  "storyName": "Will you marry me?",
+  "weekBefore": "crafters",
+  "weekName": "First Prize's Week",
+  "weekNameCode": "prize",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

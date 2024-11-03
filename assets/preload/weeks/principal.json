@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Stern", "principal", [119, 120, 118]],
-		["Whistle", "principal", [119, 120, 118]],
-		["Guilt", "principal", [119, 120, 118]]
-	],
+  "songs": [
+    ["Stern", "principal", [119, 120, 118]],
+    ["Whistle", "principal", [119, 120, 118]],
+    ["Guilt", "principal", [119, 120, 118]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "The Week of the Thing",
-	"weekBefore": "baldi",
-	"weekName": "Principal's Week",
-	"weekNameCode": "principal",
-	"startUnlocked": true,
+  "storyName": "The Week of the Thing",
+  "weekBefore": "baldi",
+  "weekName": "Principal's Week",
+  "weekNameCode": "principal",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

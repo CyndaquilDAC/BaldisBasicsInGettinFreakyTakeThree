@@ -4,89 +4,91 @@ import flixel.FlxG;
 
 class PhillyGlowParticle extends FlxSprite
 {
-	var lifeTime:Float = 0;
-	var decay:Float = 0;
-	var originalScale:Float = 1;
-	public function new(x:Float, y:Float, color:FlxColor)
-	{
-		super(x, y);
-		this.color = color;
+  var lifeTime:Float = 0;
+  var decay:Float = 0;
+  var originalScale:Float = 1;
 
-		loadGraphic(Paths.image('philly/particle'));
-		antialiasing = false;
-		lifeTime = FlxG.random.float(0.6, 0.9);
-		decay = FlxG.random.float(0.8, 1);
-		if(!ClientPrefs.flashing)
-		{
-			decay *= 0.5;
-			alpha = 0.5;
-		}
+  public function new(x:Float, y:Float, color:FlxColor)
+  {
+    super(x, y);
+    this.color = color;
 
-		originalScale = FlxG.random.float(0.75, 1);
-		scale.set(originalScale, originalScale);
+    loadGraphic(Paths.image('philly/particle'));
+    antialiasing = false;
+    lifeTime = FlxG.random.float(0.6, 0.9);
+    decay = FlxG.random.float(0.8, 1);
+    if (!ClientPrefs.flashing)
+    {
+      decay *= 0.5;
+      alpha = 0.5;
+    }
 
-		scrollFactor.set(FlxG.random.float(0.3, 0.75), FlxG.random.float(0.65, 0.75));
-		velocity.set(FlxG.random.float(-40, 40), FlxG.random.float(-175, -250));
-		acceleration.set(FlxG.random.float(-10, 10), 25);
-	}
+    originalScale = FlxG.random.float(0.75, 1);
+    scale.set(originalScale, originalScale);
 
-	override function update(elapsed:Float)
-	{
-		lifeTime -= elapsed;
-		if(lifeTime < 0)
-		{
-			lifeTime = 0;
-			alpha -= decay * elapsed;
-			if(alpha > 0)
-			{
-				scale.set(originalScale * alpha, originalScale * alpha);
-			}
-		}
-		super.update(elapsed);
-	}
+    scrollFactor.set(FlxG.random.float(0.3, 0.75), FlxG.random.float(0.65, 0.75));
+    velocity.set(FlxG.random.float(-40, 40), FlxG.random.float(-175, -250));
+    acceleration.set(FlxG.random.float(-10, 10), 25);
+  }
+
+  override function update(elapsed:Float)
+  {
+    lifeTime -= elapsed;
+    if (lifeTime < 0)
+    {
+      lifeTime = 0;
+      alpha -= decay * elapsed;
+      if (alpha > 0)
+      {
+        scale.set(originalScale * alpha, originalScale * alpha);
+      }
+    }
+    super.update(elapsed);
+  }
 }
 
 class PhillyGlowGradient extends FlxSprite
 {
-	public var originalY:Float;
-	public var originalHeight:Int = 400;
-	public var intendedAlpha:Float = 1;
-	public function new(x:Float, y:Float)
-	{
-		super(x, y);
-		originalY = y;
+  public var originalY:Float;
+  public var originalHeight:Int = 400;
+  public var intendedAlpha:Float = 1;
 
-		loadGraphic(Paths.image('philly/gradient'));
-		antialiasing = false;
-		scrollFactor.set(0, 0.75);
-		setGraphicSize(2000, originalHeight);
-		updateHitbox();
-	}
+  public function new(x:Float, y:Float)
+  {
+    super(x, y);
+    originalY = y;
 
-	override function update(elapsed:Float)
-	{
-		var newHeight:Int = Math.round(height - 1000 * elapsed);
-		if(newHeight > 0)
-		{
-			alpha = intendedAlpha;
-			setGraphicSize(2000, newHeight);
-			updateHitbox();
-			y = originalY + (originalHeight - height);
-		}
-		else
-		{
-			alpha = 0;
-			y = -5000;
-		}
+    loadGraphic(Paths.image('philly/gradient'));
+    antialiasing = false;
+    scrollFactor.set(0, 0.75);
+    setGraphicSize(2000, originalHeight);
+    updateHitbox();
+  }
 
-		super.update(elapsed);
-	}
+  override function update(elapsed:Float)
+  {
+    var newHeight:Int = Math.round(height - 1000 * elapsed);
+    if (newHeight > 0)
+    {
+      alpha = intendedAlpha;
+      setGraphicSize(2000, newHeight);
+      updateHitbox();
+      y = originalY + (originalHeight - height);
+    }
+    else
+    {
+      alpha = 0;
+      y = -5000;
+    }
 
-	public function bop()
-	{
-		setGraphicSize(2000, originalHeight);
-		updateHitbox();
-		y = originalY;
-		alpha = intendedAlpha;
-	}
+    super.update(elapsed);
+  }
+
+  public function bop()
+  {
+    setGraphicSize(2000, originalHeight);
+    updateHitbox();
+    y = originalY;
+    alpha = intendedAlpha;
+  }
 }

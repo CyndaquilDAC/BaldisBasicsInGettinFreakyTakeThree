@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Supplies", "sweep", [4, 54, 0]],
-		["Draggin", "sweep", [4, 54, 0]],
-		["Pristine", "sweep", [4, 54, 0]]
-	],
+  "songs": [
+    ["Supplies", "sweep", [4, 54, 0]],
+    ["Draggin", "sweep", [4, 54, 0]],
+    ["Pristine", "sweep", [4, 54, 0]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Gotta Week Week Week!",
-	"weekBefore": "bully",
-	"weekName": "Gotta Sweep's Week",
-	"weekNameCode": "sweep",
-	"startUnlocked": true,
+  "storyName": "Gotta Week Week Week!",
+  "weekBefore": "bully",
+  "weekName": "Gotta Sweep's Week",
+  "weekNameCode": "sweep",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

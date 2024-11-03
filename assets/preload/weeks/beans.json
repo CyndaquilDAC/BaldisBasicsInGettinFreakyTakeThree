@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Skip-Hop", "beans", [146, 113, 253]],
-		["Bubble-Trouble", "beans", [146, 113, 253]],
-		["Pain", "beans", [146, 113, 253]]
-	],
+  "songs": [
+    ["Skip-Hop", "beans", [146, 113, 253]],
+    ["Bubble-Trouble", "beans", [146, 113, 253]],
+    ["Pain", "beans", [146, 113, 253]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Beans' Beanin' Scheme!",
-	"weekBefore": "chalkles",
-	"weekName": "Beans' Week",
-	"weekNameCode": "beans",
-	"startUnlocked": true,
+  "storyName": "Beans' Beanin' Scheme!",
+  "weekBefore": "chalkles",
+  "weekName": "Beans' Week",
+  "weekNameCode": "beans",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

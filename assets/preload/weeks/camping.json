@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Bear-Trapped", "baldi", [44, 188, 49]],
-		["Stick-Shifting", "bully", [203, 96, 0]],
-		["Cumulonimbus", "cloudy", [180, 180, 179]]
-	],
+  "songs": [
+    ["Bear-Trapped", "baldi", [44, 188, 49]],
+    ["Stick-Shifting", "bully", [203, 96, 0]],
+    ["Cumulonimbus", "cloudy", [180, 180, 179]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "Let's go camping!",
-	"weekBefore": "prize",
-	"weekName": "Camping Week",
-	"weekNameCode": "camping",
-	"startUnlocked": true,
+  "storyName": "Let's go camping!",
+  "weekBefore": "prize",
+  "weekName": "Camping Week",
+  "weekNameCode": "camping",
+  "startUnlocked": true,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }

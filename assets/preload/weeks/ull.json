@@ -1,23 +1,19 @@
 {
-	"songs": [
-		["Lore", "ull", [81, 0, 9]],
-		["Jeepers", "ull", [81, 0, 9]],
-		["Null", "ull", [81, 0, 9]]
-	],
+  "songs": [
+    ["Lore", "ull", [81, 0, 9]],
+    ["Jeepers", "ull", [81, 0, 9]],
+    ["Null", "ull", [81, 0, 9]]
+  ],
 
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "stage",
+  "weekCharacters": ["dad", "bf", "gf"],
+  "weekBackground": "stage",
 
-	"storyName": "NULL",
-	"weekBefore": "the-test",
-	"weekName": "NULL",
-	"weekNameCode": "ull",
-	"startUnlocked": false,
+  "storyName": "NULL",
+  "weekBefore": "the-test",
+  "weekName": "NULL",
+  "weekNameCode": "ull",
+  "startUnlocked": false,
 
-	"hideStoryMode": false,
-	"hideFreeplay": false
+  "hideStoryMode": false,
+  "hideFreeplay": false
 }
